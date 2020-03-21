@@ -4,12 +4,119 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="EcoSave.Views.CollectorSignUpView">
+             xmlns:local="clr-namespace:EcoSave.ViewModel"
+             x:Class="EcoSave.Views.CollectorSignUpView"
+             BackgroundColor="SaddleBrown">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:CollectorViewModel x:Key="CVM"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Margin="20"
+                     BackgroundColor="Wheat"
+                     Padding="10"
+                     BindingContext="{StaticResource Key=LVM}">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.25*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.25*"/>
+                    <ColumnDefinition Width="0.25*"/>
+
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.ColumnSpan="2"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       FontSize="30"
+                       Text="Collector"
+                       TextColor="Black"/>
+
+                <Label Grid.Row="1"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                       Grid.Column="0"
+                       Text="Username:"
+                       FontSize="20"
+                       TextColor="Black"/>
+
+                <Entry Grid.Row="1"
+                       Grid.Column="1"
+                       Placeholder="Enter Username"
+                       FontSize="20"
+                       TextColor="Blue"
+                       Text="{Binding Username, Mode=TwoWay}"/>
+
+                <Label Grid.Row="2"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                       Grid.Column="0"
+                       Text="Password:"
+                       FontSize="20"
+                       TextColor="Black"/>
+
+                <Entry Grid.Row="2"
+                       Grid.Column="1"
+                       Placeholder="Enter Password"
+                       FontSize="20"
+                       TextColor="Blue"
+                       Text="{Binding Password}"/>
+
+                <Entry Grid.Row="3"
+                       Grid.Column="1"
+                       Placeholder="Confirm Password"
+                       FontSize="20"
+                       TextColor="Blue"
+                       Text="{Binding Password}"/>
+
+                <Label Grid.Row="4"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                       Grid.Column="0"
+                       Text="Address:"
+                       FontSize="20"
+                       TextColor="Black"/>
+
+                <Entry Grid.Row="4"
+                       Grid.Column="1"
+                       Placeholder="Address"
+                       FontSize="20"
+                       TextColor="Blue"
+                       Text="{Binding Password}"/>
+
+
+
+
+
+                <Button Grid.Row="5"
+                        Grid.ColumnSpan="2"
+                        Margin="30,0"
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand"
+                        Text="Save"
+                        FontSize="20"
+                        TextColor="PowderBlue"
+                        BackgroundColor="Goldenrod"
+                        Command="{Binding SignUpExecute}"/>
+
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
+
+
 </ContentPage>
