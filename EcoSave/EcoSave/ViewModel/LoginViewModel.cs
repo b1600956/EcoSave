@@ -148,7 +148,7 @@ namespace EcoSave.ViewModel
                         }
                         Username = string.Empty;
                         Password = string.Empty;
-                        await Application.Current.MainPage.Navigation.PushAsync(view);
+                        Application.Current.MainPage = new NavigationPage(view);
                     }
                     else
                     {

@@ -43,7 +43,7 @@
                        HorizontalOptions="Center"
                        VerticalOptions="Center"
                        FontSize="30"
-                       Text="Collector"
+                       Text="Recycler"
                        TextColor="Black"/>
 
                 <Label Grid.Row="1"
@@ -74,14 +74,16 @@
                        Placeholder="Enter Password"
                        FontSize="20"
                        TextColor="Blue"
-                       Text="{Binding Password, Mode=TwoWay}"/>
+                       Text="{Binding Password, Mode=TwoWay}"
+                       IsPassword="True"/>
 
                 <Entry Grid.Row="3"
                        Grid.Column="1"
                        Placeholder="Confirm Password"
                        FontSize="20"
                        TextColor="Blue"
-                       Text="{Binding ConfirmPassword, Mode=TwoWay}"/>
+                       Text="{Binding ConfirmPassword, Mode=TwoWay}"
+                       IsPassword="True"/>
 
                 <Label Grid.Row="4"
                        HorizontalOptions="Start"
@@ -109,7 +111,17 @@
                         FontSize="20"
                         TextColor="PowderBlue"
                         BackgroundColor="Goldenrod"
-                        Command="{Binding SignUp}"/>
+                        Command="{Binding SignUp}"
+                        CommandParameter="{Binding CanSignUp}"/>
+
+                <Label Grid.Row="8"
+                       Grid.ColumnSpan="2"
+                       Margin="30,0"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                       Text="{Binding SignUpStatus}"
+                       FontSize="15"
+                       TextColor="Red"/>
 
             </Grid>
         </StackLayout>

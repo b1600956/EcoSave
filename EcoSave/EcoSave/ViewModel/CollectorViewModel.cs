@@ -150,7 +150,8 @@ namespace EcoSave.ViewModel
             SignUpStatus = string.Empty;
             if (CheckPassword())
             {
-                if (CollectorDA.GetCollector(Collector) == null)
+                Collector collector = await CollectorDA.GetCollector(Collector);
+                if (collector == null)
                 {
                     Collector.TotalPoints = 0;
                     await CollectorDA.AddCollector(Collector);
@@ -165,6 +166,10 @@ namespace EcoSave.ViewModel
                 {
                     SignUpStatus = "Username already exists! Please choose another username";
                 }
+            }
+            else
+            {
+                SignUpStatus = "Confirmation password is not matched with your password";
             }
         }
 
@@ -209,10 +214,11 @@ namespace EcoSave.ViewModel
         {
             Application.Current.MainPage.Navigation.PushAsync(new Views.MaterialSubmissionView());
         }
-        private async void SignOutExecute(object obj)
+        private void SignOutExecute(object obj)
         {
             Application.Current.Properties["loggedIn"] = 0;
-            await Application.Current.MainPage.Navigation.PopAsync();
+            Collector = null;
+            Application.Current.MainPage = new NavigationPage(new Views.StartView());
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

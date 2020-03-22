@@ -139,7 +139,8 @@ namespace EcoSave.ViewModel
             SignUpStatus = string.Empty;
             if (CheckPassword())
             {
-                if (RecyclerDA.GetRecycler(Recycler) == null)
+                Recycler recycler = await RecyclerDA.GetRecycler(Recycler);
+                if ( recycler == null)
                 {
                     Recycler.EcoLevel = EcoLevelOne;
                     Recycler.TotalPoints = 0;
@@ -154,6 +155,10 @@ namespace EcoSave.ViewModel
                 {
                     SignUpStatus = "Username already exists! Please choose another username";
                 }
+            }
+            else
+            {
+                SignUpStatus = "Confirmation password is not matched with your password";
             }
         }
 
@@ -190,15 +195,16 @@ namespace EcoSave.ViewModel
         private void OpenRecycleMaterialExecute(object obj)
         {
             Application.Current.MainPage.Navigation.PushAsync(new Views.RecycleMaterialView());
-        }
+        }s
         private void OpenMaterialSubmissionExecute(object obj)
         {
             Application.Current.MainPage.Navigation.PushAsync(new Views.MaterialSubmissionView());
         }
-        private async void SignOutExecute(object obj)
+        private void SignOutExecute(object obj)
         {
             Application.Current.Properties["loggedIn"] = 0;
-            await Application.Current.MainPage.Navigation.PopAsync();
+            Recycler = null;
+            Application.Current.MainPage = new NavigationPage(new Views.StartView());
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

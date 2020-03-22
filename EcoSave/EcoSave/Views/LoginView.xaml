@@ -71,24 +71,49 @@
                        Placeholder="Enter Password"
                        FontSize="20"
                        TextColor="Blue"
-                       Text="{Binding Password}"/>
+                       Text="{Binding Password}"
+                       IsPassword="{Binding ShowPassword}"/>
 
-                
-               
+                <StackLayout
+                    Orientation="Horizontal"
+                    Grid.Row="3"
+                    Grid.Column="1">
+                    <CheckBox IsChecked="{Binding ShowPassword, Mode=OneWayToSource}"
+                              VerticalOptions="Center"/>
+                    <Label
+                        Text="show password"
+                        FontSize="15"
+                        VerticalOptions="Center"/>
+                </StackLayout>
 
                 <Button Grid.Row="5"
-                        Grid.ColumnSpan="2"
-                        Margin="30,0"
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand"
+                        Text="Sign Up"
+                        FontSize="20"
+                        TextColor="PowderBlue"
+                        BackgroundColor="Goldenrod"
+                        Command="{Binding OpenSignUpView}"/>
+
+                <Button Grid.Row="5"
+                        Grid.Column="1"
                         VerticalOptions="FillAndExpand"
                         HorizontalOptions="FillAndExpand"
                         Text="Login"
                         FontSize="20"
                         TextColor="PowderBlue"
                         BackgroundColor="Goldenrod"
-                        Command="{Binding SignIn}"/>
+                        Command="{Binding SignIn}"
+                        CommandParameter="{Binding CanSign}"/>
 
-
-
+                <Label Grid.Row="6"
+                       Grid.ColumnSpan="2"
+                       Margin="30,0"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                       Text="{Binding LoginStatus}"
+                       FontSize="15"
+                       TextColor="Red"/>
             </Grid>
         </StackLayout>
     </ContentPage.Content>
