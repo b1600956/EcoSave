@@ -195,7 +195,7 @@ namespace EcoSave.ViewModel
         private void OpenRecycleMaterialExecute(object obj)
         {
             Application.Current.MainPage.Navigation.PushAsync(new Views.RecycleMaterialView());
-        }s
+        }
         private void OpenMaterialSubmissionExecute(object obj)
         {
             Application.Current.MainPage.Navigation.PushAsync(new Views.MaterialSubmissionView());
