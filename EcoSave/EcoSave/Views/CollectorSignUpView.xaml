@@ -18,7 +18,7 @@
         <StackLayout Margin="20"
                      BackgroundColor="Wheat"
                      Padding="10"
-                     BindingContext="{StaticResource Key=LVM}">
+                     BindingContext="{StaticResource Key=CVM}">
 
             <Grid>
                 <Grid.RowDefinitions>
@@ -75,44 +75,55 @@
                        Placeholder="Enter Password"
                        FontSize="20"
                        TextColor="Blue"
-                       Text="{Binding Password}"/>
+                       Text="{Binding Password, Mode=TwoWay}"/>
 
                 <Entry Grid.Row="3"
                        Grid.Column="1"
                        Placeholder="Confirm Password"
                        FontSize="20"
                        TextColor="Blue"
-                       Text="{Binding Password}"/>
+                       Text="{Binding ConfirmPassword, Mode=TwoWay}"/>
 
                 <Label Grid.Row="4"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                       Grid.Column="0"
+                       Text="Full Name:"
+                       FontSize="20"
+                       TextColor="Black"/>
+
+                <Entry Grid.Row="4"
+                       Grid.Column="1"
+                       Placeholder="Full Name"
+                       FontSize="20"
+                       TextColor="Blue"
+                       Text="{Binding FullName, Mode=TwoWay}"/>
+
+                <Label Grid.Row="5"
                        HorizontalOptions="Start"
                        VerticalOptions="Center"
                        Grid.Column="0"
                        Text="Address:"
                        FontSize="20"
                        TextColor="Black"/>
-
-                <Entry Grid.Row="4"
+                
+                <Entry Grid.Row="5"
                        Grid.Column="1"
                        Placeholder="Address"
                        FontSize="20"
                        TextColor="Blue"
-                       Text="{Binding Password}"/>
+                       Text="{Binding Address}"/>
 
-
-
-
-
-                <Button Grid.Row="5"
+                <Button Grid.Row="7"
                         Grid.ColumnSpan="2"
                         Margin="30,0"
                         VerticalOptions="FillAndExpand"
                         HorizontalOptions="FillAndExpand"
-                        Text="Save"
+                        Text="Create Account"
                         FontSize="20"
                         TextColor="PowderBlue"
                         BackgroundColor="Goldenrod"
-                        Command="{Binding SignUpExecute}"/>
+                        Command="{Binding SignUp}"/>
 
             </Grid>
         </StackLayout>
