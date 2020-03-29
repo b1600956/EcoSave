@@ -4,12 +4,99 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="EcoSave.Views.AddMaterialView">
+             xmlns:local="clr-namespace:EcoSave.ViewModel"
+             x:Class="EcoSave.Views.AddMaterialView"
+             BackgroundColor="SaddleBrown">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:MaterialViewModel x:Key="MVM"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Margin="20"
+                     BackgroundColor="Wheat"
+                     Padding="10"
+                     BindingContext="{StaticResource Key=MVM}">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.25*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.05*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.25*"/>
+                    <ColumnDefinition Width="0.25*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.ColumnSpan="2"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       FontSize="30"
+                       Text="Add Material"
+                       TextColor="Black"/>
+
+                <Label Grid.Row="1"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                       Grid.Column="0"
+                       Text="Material Name:"
+                       FontSize="20"
+                       TextColor="Black"/>
+
+                <Entry Grid.Row="1"
+                       Grid.Column="1"                      
+                       FontSize="20"
+                       TextColor="Blue"
+                       Text="{Binding MaterialName, Mode=TwoWay}"/>
+
+                <Label Grid.Row="2"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                       Grid.Column="0"
+                       Text="Description :"
+                       FontSize="20"
+                       TextColor="Black"/>
+
+                <Entry Grid.Row="2"
+                       Grid.Column="1"                       
+                       FontSize="20"
+                       TextColor="Blue"
+                       Text="{Binding Description}"/>
+
+                <Label Grid.Row="3"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                       Grid.Column="0"
+                       Text="Points per KG:"
+                       FontSize="20"
+                       TextColor="Black"/>
+
+                <Entry Grid.Row="3"
+                       Grid.Column="1"                      
+                       FontSize="20"
+                       TextColor="Blue"
+                       Text="{Binding PointsPerKg, Mode=TwoWay}"/>
+                                
+
+                <Button Grid.Row="5"
+                        Grid.ColumnSpan="2"
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="Add"
+                        FontSize="20"
+                        TextColor="PowderBlue"
+                        BackgroundColor="Goldenrod"
+                        Command="{Binding UploadMaterial}"
+                        CommandParameter="{Binding CanSign}"/>
+                
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

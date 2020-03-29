@@ -4,12 +4,97 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="EcoSave.Views.MaterialDetailView">
+             xmlns:local="clr-namespace:EcoSave.ViewModel"
+             x:Class="EcoSave.Views.MaterialDetailView"
+             BackgroundColor="SaddleBrown">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:MaterialViewModel x:Key="MVM" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout BindingContext="{StaticResource MVM}"
+                     Margin="10"
+                     Padding="10"
+                     BackgroundColor="Orange">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*" />
+                    <RowDefinition Height="0.1*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions>
+
+
+                <Label Grid.ColumnSpan="2"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       FontSize="30"
+                       Text="Add Material"
+                       TextColor="Black"/>
+
+                <Label Grid.Row="2"
+                       Grid.Column="0"
+                       Text="Material Name:"
+                       FontSize="20"
+                       TextColor="Black" 
+                       HorizontalOptions="Start"/>
+
+                <Label Grid.Row="3"
+                       Grid.Column="0"
+                       Text="Description:"
+                       FontSize="20"
+                       TextColor="Black" 
+                       HorizontalOptions="Start"/>
+
+                <Label Grid.Row="4"
+                       Grid.Column="0"
+                       Text="PointsperKG:"
+                       FontSize="20"
+                       TextColor="Black"
+                       HorizontalOptions="Start" />
+
+                
+                <Entry Grid.Row="2"
+                       Grid.Column="1"
+                       Text="{Binding MaterialName, Mode=TwoWay}"/>
+
+                <Entry Grid.Row="3"
+                       Grid.Column="1"
+                       Text="{Binding Description, Mode=TwoWay}" />
+
+                <Entry Grid.Row="4"
+                       Grid.Column="1"
+                       Text="{Binding PointsPerKg, Mode=TwoWay}" />
+
+                
+
+                <Button Grid.Row="8"
+                        Grid.ColumnSpan="2"
+                        CornerRadius="10"
+                        Text="Update"
+                        FontSize="20"
+                        Command="{Binding UpdateMaterial }"/>
+
+                <Button Grid.Row="9"
+                        Grid.ColumnSpan="2"
+                        CornerRadius="10"
+                        Text="Delete"
+                        FontSize="20"
+                        Command="{Binding DeleteMaterial}" />
+
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
