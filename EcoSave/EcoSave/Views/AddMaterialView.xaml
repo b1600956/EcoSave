@@ -54,7 +54,7 @@
                        Grid.Column="1"                      
                        FontSize="20"
                        TextColor="Blue"
-                       Text="{Binding MaterialName, Mode=TwoWay}"/>
+                       Text="{Binding MaterialName, Mode=OneWayToSource}"/>
 
                 <Label Grid.Row="2"
                        HorizontalOptions="Start"
@@ -64,11 +64,11 @@
                        FontSize="20"
                        TextColor="Black"/>
 
-                <Entry Grid.Row="2"
+                <Editor Grid.Row="2"
                        Grid.Column="1"                       
                        FontSize="20"
                        TextColor="Blue"
-                       Text="{Binding Description}"/>
+                       Text="{Binding Description, Mode=OneWayToSource}"/>
 
                 <Label Grid.Row="3"
                        HorizontalOptions="Start"
@@ -82,7 +82,8 @@
                        Grid.Column="1"                      
                        FontSize="20"
                        TextColor="Blue"
-                       Text="{Binding PointsPerKg, Mode=TwoWay}"/>
+                       Keyboard="Numeric"
+                       Text="{Binding PointsPerKg, Mode=OneWayToSource}"/>
                                 
 
                 <Button Grid.Row="5"
@@ -94,7 +95,7 @@
                         TextColor="PowderBlue"
                         BackgroundColor="Goldenrod"
                         Command="{Binding UploadMaterial}"
-                        CommandParameter="{Binding CanSign}"/>
+                        CommandParameter="{Binding CanAdd}"/>
                 
             </Grid>
         </StackLayout>

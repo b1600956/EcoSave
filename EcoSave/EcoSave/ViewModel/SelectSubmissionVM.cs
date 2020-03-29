@@ -38,7 +38,8 @@ namespace EcoSave.ViewModel
             set
             {
                 selectedSubmission = value;
-                OpenRecordMaterialView.Execute(selectedSubmission);
+                if(selectedSubmission != null)
+                    OpenRecordMaterialView.Execute(selectedSubmission);
                 selectedSubmission = null;
                 OnPropertyChanged();
             }

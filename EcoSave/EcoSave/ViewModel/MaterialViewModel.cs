@@ -14,12 +14,26 @@ namespace EcoSave.ViewModel
     {
         public static Material Material { get; set; }
 
+        private bool canAdd;
+        public bool CanAdd
+        {
+            get
+            {
+                return canAdd;
+            }
+            set
+            {
+                canAdd = value;
+                OnPropertyChanged();
+            }
+        }
         public string MaterialName
         {
             get { return Material.MaterialName; }
             set
             {
                 Material.MaterialName = value;
+                CanAdd = CheckMaterialFields();
                 OnPropertyChanged();
             }
         }
@@ -30,6 +44,7 @@ namespace EcoSave.ViewModel
             set
             {
                 Material.Description = value;
+                CanAdd = CheckMaterialFields();
                 OnPropertyChanged();
             }
         }
@@ -39,8 +54,17 @@ namespace EcoSave.ViewModel
             set
             {
                 Material.PointsPerKg = value;
+                CanAdd = CheckMaterialFields();
                 OnPropertyChanged();
             }
+        }
+
+        private bool CheckMaterialFields()
+        {
+            bool result = !string.IsNullOrWhiteSpace(Material.MaterialName) &&
+                          !string.IsNullOrWhiteSpace(Material.Description) &&
+                          Material.PointsPerKg > 0;
+            return result;
         }
 
         public ICommand UploadMaterial { get; set; }
@@ -53,9 +77,14 @@ namespace EcoSave.ViewModel
             {
                 Material = new Material();
             }
-            UploadMaterial = new Command(UploadMaterialExecute);
-            UpdateMaterial = new Command(UpdateMaterialExecute);
+            UploadMaterial = new Command(UploadMaterialExecute, CanAddMaterial);
+            UpdateMaterial = new Command(UpdateMaterialExecute, CanAddMaterial);
             DeleteMaterial = new Command(DeleteMaterialExecute);
+        }
+
+        private bool CanAddMaterial(object arg)
+        {
+            return CanAdd;
         }
 
         private async void UploadMaterialExecute(object obj)

@@ -41,7 +41,7 @@
                        HorizontalOptions="Center"
                        VerticalOptions="Center"
                        FontSize="30"
-                       Text="Add Material"
+                       Text="Material Detail"
                        TextColor="Black"/>
 
                 <Label Grid.Row="2"
@@ -60,7 +60,7 @@
 
                 <Label Grid.Row="4"
                        Grid.Column="0"
-                       Text="PointsperKG:"
+                       Text="PointsPerKG:"
                        FontSize="20"
                        TextColor="Black"
                        HorizontalOptions="Start" />
@@ -85,7 +85,8 @@
                         CornerRadius="10"
                         Text="Update"
                         FontSize="20"
-                        Command="{Binding UpdateMaterial }"/>
+                        Command="{Binding UpdateMaterial}"
+                        CommandParameter="{Binding CanAdd}"/>
 
                 <Button Grid.Row="9"
                         Grid.ColumnSpan="2"

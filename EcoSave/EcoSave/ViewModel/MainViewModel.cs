@@ -21,10 +21,10 @@ namespace EcoSave.ViewModel
             SignOut = new Command(SignOutExecute);
         }
 
-        private async void SignOutExecute(object obj)
+        private void SignOutExecute(object obj)
         {
             Application.Current.Properties["loggedIn"] = 0;
-            await Application.Current.MainPage.Navigation.PopAsync();
+            Application.Current.MainPage = new NavigationPage(new Views.StartView());
         }
 
         private void OpenMaterialSubmissionExecute(object obj)

@@ -10,15 +10,21 @@
     
     <ContentPage.Resources>
         <ResourceDictionary>
-            <local:StartViewModel x:Key="SVM"/>
+            <local:MainViewModel x:Key="MVM"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem BindingContext="{StaticResource Key=MVM}"
+                     Text="Sign Out"
+                     Command="{Binding SignOut}"/>
+    </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
         <StackLayout Margin="20"
                      BackgroundColor="Wheat"
                      Padding="10"
-                     BindingContext="{StaticResource Key=SVM}">
+                     BindingContext="{StaticResource Key=MVM}">
 
             <Grid>
                 <Grid.RowDefinitions>
@@ -35,7 +41,7 @@
                     <ColumnDefinition Width="0.25*"/>
                     <ColumnDefinition Width="0.25*"/>
                 </Grid.ColumnDefinitions>
-                
+
 
                 <Label Grid.ColumnSpan="2"
                        HorizontalOptions="Center"
@@ -44,24 +50,7 @@
                        Text="Admin MainPage"
                        TextColor="Black"/>
 
-               <Label Grid.Row="1"
-                       Grid.Column="0"                     
-                       FontSize="20"
-                       TextColor="Blue"
-                       Text="{Binding Username, Mode=TwoWay}"/>
-
-                    <Button Grid.Row="2"
-                        Grid.ColumnSpan="2"
-                        Margin="30,0"
-                        VerticalOptions="FillAndExpand"
-                        HorizontalOptions="FillAndExpand"
-                        Text="Add New Material"
-                        FontSize="20"
-                        TextColor="Black"
-                        BackgroundColor="orange"
-                        Command="{Binding UserAsRecycler}"/>
-
-                <Button Grid.Row="3"
+                <Button Grid.Row="2"
                         Grid.ColumnSpan="2"
                         Margin="30,0"
                         VerticalOptions="FillAndExpand"
@@ -70,21 +59,19 @@
                         FontSize="20"
                         TextColor="Black"
                         BackgroundColor="orange"
-                        Command="{Binding UserAsCollector}"/>
+                        Command="{Binding OpenManageMaterialView}"/>
 
 
-                <Button Grid.Row="4"
+                <Button Grid.Row="3"
                         Grid.ColumnSpan="2"
                         Margin="30,0"
                         VerticalOptions="FillAndExpand"
                         HorizontalOptions="FillAndExpand"
-                        Text="History"
+                        Text="View Submission History"
                         FontSize="20"
                         TextColor="black"
                         BackgroundColor="orange" 
-                        Command="{Binding UserAsAdmin}"/>
-
-
+                        Command="{Binding OpenMaterialSubmissionView}"/>
 
             </Grid>
         </StackLayout>

@@ -21,7 +21,8 @@ namespace EcoSave.ViewModel
             set 
             { 
                 selectedMaterial = value;
-                ViewMaterialDetail.Execute(selectedMaterial);
+                if(selectedMaterial != null)
+                    ViewMaterialDetail.Execute(selectedMaterial);
                 selectedMaterial = null;
                 OnPropertyChanged();
             }

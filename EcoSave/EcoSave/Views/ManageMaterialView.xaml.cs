@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EcoSave.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +21,7 @@ namespace EcoSave.Views
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            //materialListView.ItemSource = await MaterialDA.GetAllMaterials();
+            MyListView.ItemsSource = await MaterialDA.GetAllMaterials();
         }
     }
 }
