@@ -3,13 +3,92 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:EcoSave.ViewModel"
              mc:Ignorable="d"
              x:Class="EcoSave.Views.UpdateCollectorView">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:CollectorViewModel x:Key="CVM" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout BindingContext="{StaticResource CVM}"
+                     Margin="10"
+                     Padding="10"
+                     BackgroundColor="Orange">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*" />
+                    <RowDefinition Height="0.1*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions>
+
+
+                <Label Grid.ColumnSpan="2"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       FontSize="30"
+                       Text="Profile"
+                       TextColor="Black"/>
+
+                <Label Grid.Row="2"
+                       Grid.Column="0"
+                       Text="Username:"
+                       FontSize="20"
+                       TextColor="Black" 
+                       HorizontalOptions="Start"/>
+
+                <Label Grid.Row="3"
+                       Grid.Column="0"
+                       Text="Password:"
+                       FontSize="20"
+                       TextColor="Black" 
+                       HorizontalOptions="Start"/>
+
+                <Label Grid.Row="4"
+                       Grid.Column="0"
+                       Text="Full name:"
+                       FontSize="20"
+                       TextColor="Black"
+                       HorizontalOptions="Start" />
+
+
+                <Entry Grid.Row="2"
+                       Grid.Column="1"
+                       Text="{Binding Username, Mode=TwoWay}"
+                       IsEnabled="False"/>
+
+                <Entry Grid.Row="3"
+                       Grid.Column="1"
+                       Text="{Binding Password, Mode=TwoWay}" />
+
+                <Entry Grid.Row="4"
+                       Grid.Column="1"
+                       Text="{Binding FullName, Mode=TwoWay}" />
+
+
+
+                <Button Grid.Row="8"
+                        Grid.ColumnSpan="2"
+                        CornerRadius="10"
+                        Text="Update"
+                        FontSize="20"
+                        Command="{Binding UpdateCollector}"
+                        CommandParameter="{Binding CanUpdate}"/>
+
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -54,7 +54,7 @@ namespace EcoSave.Utilities
                 {
                     foreach (Material material in materials)
                     {
-                        if (materialCollection.Contains(material.MaterialID))
+                        if (materialCollection == null || !materialCollection.Contains(material.MaterialID))
                             materialsList.Add(material);
                     }
                     return materialsList;

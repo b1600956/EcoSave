@@ -154,6 +154,7 @@ namespace EcoSave.ViewModel
                 if (collector == null)
                 {
                     Collector.TotalPoints = 0;
+                    Collector.MaterialCollection = new List<string>();
                     await CollectorDA.AddCollector(Collector);
                     Username = string.Empty;
                     Password = string.Empty;

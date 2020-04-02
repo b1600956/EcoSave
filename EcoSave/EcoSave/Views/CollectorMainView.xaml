@@ -8,12 +8,12 @@
              x:Class="EcoSave.Views.CollectorMainView">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <local:MainViewModel x:Key="MVM"/>
+            <local:CollectorViewModel x:Key="CVM"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem BindingContext="{StaticResource Key=MVM}"
+        <ToolbarItem BindingContext="{StaticResource Key=CVM}"
                      Text="Sign Out"
                      Command="{Binding SignOut}"/>
     </ContentPage.ToolbarItems>
@@ -22,7 +22,7 @@
         <StackLayout Margin="20"
                      BackgroundColor="Wheat"
                      Padding="10"
-                     BindingContext="{StaticResource Key=MVM}">
+                     BindingContext="{StaticResource Key=CVM}">
 
             <Grid>
                 <Grid.RowDefinitions>
@@ -45,7 +45,7 @@
                        HorizontalOptions="Center"
                        VerticalOptions="Center"
                        FontSize="30"
-                       Text="Admin MainPage"
+                       Text="Collector MainPage"
                        TextColor="Black"/>
 
                 <Button Grid.Row="2"
@@ -57,7 +57,7 @@
                         FontSize="20"
                         TextColor="Black"
                         BackgroundColor="orange"
-                        Command="{Binding OpenManageMaterialView}"/>
+                        Command="{Binding OpenAddCollectionView}"/>
 
 
                 <Button Grid.Row="3"
@@ -69,7 +69,7 @@
                         FontSize="20"
                         TextColor="black"
                         BackgroundColor="orange" 
-                        Command="{Binding OpenMaterialSubmissionView}"/>
+                        Command="{Binding OpenUpdateCollectorView}"/>
 
             </Grid>
         </StackLayout>

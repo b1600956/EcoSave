@@ -8,12 +8,12 @@
              x:Class="EcoSave.Views.RecyclerMainView">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <local:MainViewModel x:Key="MVM"/>
+            <local:RecyclerViewModel x:Key="RVM"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem BindingContext="{StaticResource Key=MVM}"
+        <ToolbarItem BindingContext="{StaticResource Key=RVM}"
                      Text="Sign Out"
                      Command="{Binding SignOut}"/>
     </ContentPage.ToolbarItems>
@@ -22,7 +22,7 @@
         <StackLayout Margin="20"
                      BackgroundColor="Wheat"
                      Padding="10"
-                     BindingContext="{StaticResource Key=MVM}">
+                     BindingContext="{StaticResource Key=RVM}">
 
             <Grid>
                 <Grid.RowDefinitions>
@@ -45,7 +45,7 @@
                        HorizontalOptions="Center"
                        VerticalOptions="Center"
                        FontSize="30"
-                       Text="Admin MainPage"
+                       Text="Recyler MainPage"
                        TextColor="Black"/>
 
                 <Button Grid.Row="2"
@@ -57,7 +57,7 @@
                         FontSize="20"
                         TextColor="Black"
                         BackgroundColor="orange"
-                        Command="{Binding OpenManageMaterialView}"/>
+                        Command="{Binding OpenRecycleMaterialView}"/>
 
                 <Button Grid.Row="3"
                         Grid.ColumnSpan="2"
@@ -80,7 +80,7 @@
                         FontSize="20"
                         TextColor="black"
                         BackgroundColor="orange" 
-                        Command="{Binding OpenMaterialSubmissionView}"/>
+                        Command="{Binding OpenUpdateRecyclerView}"/>
 
             </Grid>
         </StackLayout>

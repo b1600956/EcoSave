@@ -55,26 +55,17 @@ namespace EcoSave.ViewModel
 
         private async void GetAvailableMaterials()
         {
-            ObservableCollection<Material> AllMaterials = new ObservableCollection<Material>();
-            AllMaterials = await MaterialDA.GetAllMaterials();
-            ObservableCollection<Material> MaterialCollectionList = new ObservableCollection<Material>();
-            MaterialCollectionList = await MaterialDA.GetMaterialsById(CollectorViewModel.Collector.MaterialCollection);
-            if (AllMaterials != null)
-            {
-                foreach (Material material in AllMaterials)
-                {
-                    if (!MaterialCollectionList.Contains(material))
-                    {
-                        AvailableMaterialList.Add(material);
-                    }
-                }
-            }
+            AvailableMaterialList = await MaterialDA.GetMaterialsById(CollectorViewModel.Collector.MaterialCollection);
         }
         private async void AddMaterialExecute(Material material)
         {
             Collector collector = CollectorViewModel.Collector;
+            if (collector.MaterialCollection == null)
+                collector.MaterialCollection = new List<string>();
             collector.MaterialCollection.Add(material.MaterialID);
             await CollectorDA.UpdateCollector(collector);
+            if (material.CollectorList == null)
+                material.CollectorList = new List<string>();
             material.CollectorList.Add(collector.Username);
             await MaterialDA.UpdateMaterial(material);
             AvailableMaterialList.Remove(material);

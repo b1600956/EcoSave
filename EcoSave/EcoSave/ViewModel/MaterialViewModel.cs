@@ -90,6 +90,7 @@ namespace EcoSave.ViewModel
         private async void UploadMaterialExecute(object obj)
         {
             Material.MaterialID = Guid.NewGuid().ToString();
+            Material.CollectorList = new List<string>();
             await MaterialDA.AddMaterial(Material);
             await Application.Current.MainPage.Navigation.PopAsync();
         }
