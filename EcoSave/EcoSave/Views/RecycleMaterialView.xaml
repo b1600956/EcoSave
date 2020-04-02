@@ -4,12 +4,82 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             xmlns:local="clr-namespace:EcoSave.ViewModel"
              x:Class="EcoSave.Views.RecycleMaterialView">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:ManageMaterialVM x:Key="MMVM" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout BindingContext="{StaticResource MMVM}"
+                     Margin="10"
+                     Padding="10">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.9*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Text="Material ID"/>
+                <Label Text="Material Name"
+                       Grid.Column="1"/>
+                <Label Text="Description" Grid.Column="2"/>
+                <Label Text="PointperKG" Grid.Column="3"/>
+                <ListView x:Name="MyListView"
+                          ItemsSource="{Binding MaterialList}"
+                          SelectedItem="{Binding SelectedMaterial,Mode=OneWayToSource}"
+                          Grid.Row="1"
+                          Grid.ColumnSpan="4"
+                          CachingStrategy="RecycleElement">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="0.5*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.5*"/>
+                                        <ColumnDefinition Width="0.5*"/>
+                                        <ColumnDefinition Width="0.5*"/>
+                                        <ColumnDefinition Width="0.5*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Row="0"
+                                           Text="{Binding MaterialID}"/>
+
+                                    <Label Grid.Row="0"
+                                           Grid.Column="1"
+                                           Text="{Binding MaterialName}"/>
+
+                                    <Label Grid.Row="0"
+                                           Grid.Column="2"                                          
+                                           Text="{Binding Description}"/>
+
+                                    <Label Grid.Row="0"
+                                           Grid.Column="3"                                          
+                                           Text="{Binding PointsPerKg}"/>
+
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
+            </Grid>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

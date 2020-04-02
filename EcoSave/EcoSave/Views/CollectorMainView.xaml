@@ -4,12 +4,74 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             xmlns:local="clr-namespace:EcoSave.ViewModel"
              x:Class="EcoSave.Views.CollectorMainView">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:MainViewModel x:Key="MVM"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem BindingContext="{StaticResource Key=MVM}"
+                     Text="Sign Out"
+                     Command="{Binding SignOut}"/>
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Margin="20"
+                     BackgroundColor="Wheat"
+                     Padding="10"
+                     BindingContext="{StaticResource Key=MVM}">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.25*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.25*"/>
+                    <ColumnDefinition Width="0.25*"/>
+                </Grid.ColumnDefinitions>
+
+
+                <Label Grid.ColumnSpan="2"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       FontSize="30"
+                       Text="Admin MainPage"
+                       TextColor="Black"/>
+
+                <Button Grid.Row="2"
+                        Grid.ColumnSpan="2"
+                        Margin="30,0"
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand"
+                        Text="Available material"
+                        FontSize="20"
+                        TextColor="Black"
+                        BackgroundColor="orange"
+                        Command="{Binding OpenManageMaterialView}"/>
+
+
+                <Button Grid.Row="3"
+                        Grid.ColumnSpan="2"
+                        Margin="30,0"
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand"
+                        Text="Profile"
+                        FontSize="20"
+                        TextColor="black"
+                        BackgroundColor="orange" 
+                        Command="{Binding OpenMaterialSubmissionView}"/>
+
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
