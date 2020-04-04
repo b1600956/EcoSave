@@ -10,14 +10,14 @@
     
     <ContentPage.Resources>
         <ResourceDictionary>
-            <local:ManageMaterialVM x:Key="MMVM" />
+            <local:SelectSubmissionVM x:Key="SSVM" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
 
 
     <ContentPage.Content>
-        <StackLayout BindingContext="{StaticResource MMVM}"
+        <StackLayout BindingContext="{StaticResource SSVM}"
                      Margin="10"
                      Padding="10">
 
@@ -34,14 +34,15 @@
                     <ColumnDefinition Width="0.5*"/>
                 </Grid.ColumnDefinitions>
 
-                <Label Text="Material ID"/>
+                <Label Text="Propose Date"/>
                 <Label Text="Material Name"
                        Grid.Column="1"/>
-                <Label Text="Description" Grid.Column="2"/>
-                <Label Text="PointperKG" Grid.Column="3"/>
+                <Label Text="Status" Grid.Column="2"/>
+                <Label Text="Submission ID" Grid.Column="3"/>
+                
                 <ListView x:Name="MyListView"
-                          ItemsSource="{Binding MaterialList}"
-                          SelectedItem="{Binding SelectedMaterial,Mode=OneWayToSource}"
+                          ItemsSource="{Binding SubmissionList}"
+                          SelectedItem="{Binding SelectedSubmission,Mode=OneWayToSource}"
                           Grid.Row="1"
                           Grid.ColumnSpan="4"
                           CachingStrategy="RecycleElement">
@@ -59,19 +60,19 @@
                                         <ColumnDefinition Width="0.5*"/>
                                     </Grid.ColumnDefinitions>
                                     <Label Grid.Row="0"
-                                           Text="{Binding MaterialID}"/>
+                                           Text="{Binding ProposedDate}"/>
 
                                     <Label Grid.Row="0"
                                            Grid.Column="1"
-                                           Text="{Binding MaterialName}"/>
+                                           Text="{Binding Material}"/>
 
                                     <Label Grid.Row="0"
                                            Grid.Column="2"                                          
-                                           Text="{Binding Description}"/>
+                                           Text="{Binding Status}"/>
 
                                     <Label Grid.Row="0"
                                            Grid.Column="3"                                          
-                                           Text="{Binding PointsPerKg}"/>
+                                           Text="{Binding SubmissionID}"/>  
 
                                 </Grid>
                             </ViewCell>
