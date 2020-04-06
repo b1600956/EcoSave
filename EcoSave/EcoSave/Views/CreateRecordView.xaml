@@ -5,8 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              xmlns:local="clr-namespace:EcoSave.ViewModel"
-             x:Class="EcoSave.Views.RecordMaterialView">
-    
+             x:Class="EcoSave.Views.CreateRecordView">
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:SubmissionViewModel x:Key="SVM"/>
@@ -49,11 +48,11 @@
                        FontSize="20"
                        TextColor="Black"/>
 
-                <Label Grid.Row="1"
+                <Entry Grid.Row="1"
                        Grid.Column="1"                      
                        FontSize="20"
                        TextColor="Blue"
-                       Text="{Binding RecyclerUsername}"
+                       Text="{Binding RecyclerUsername, Mode=OneWayToSource}"
                        />
 
                 <Label Grid.Row="2"
@@ -68,8 +67,8 @@
                        Grid.Column="1"                      
                        FontSize="20"
                        TextColor="Blue"
-                       Text="{Binding MaterialName, Mode=TwoWay}"/>
-                
+                       Text="{Binding MaterialName, Mode=OneWayToSource}"/>
+
                 <Label Grid.Row="3"
                        HorizontalOptions="Start"
                        VerticalOptions="Center"
@@ -85,9 +84,9 @@
                        Keyboard="Numeric"
                        Text="{Binding WeightInKg, Mode=OneWayToSource}"/>
 
-               
 
-               
+
+
                 <Button Grid.Row="5"
                         Grid.ColumnSpan="2"
                         VerticalOptions="CenterAndExpand"
@@ -96,14 +95,14 @@
                         FontSize="20"
                         TextColor="PowderBlue"
                         BackgroundColor="Goldenrod"
-                        Command="{Binding UpdateSubmission}"
-                        CommandParameter="{Binding CanUpdate}"/>
+                        Command="{Binding CreateSubmission}"
+                        CommandParameter="{Binding CanCreate}"/>
 
                 <Label Grid.Row="6"
                        Grid.ColumnSpan="2"
                        HorizontalOptions="Start"
                        VerticalOptions="Center"
-                       Text="{Binding UpdateStatus}"
+                       Text="{Binding CreateStatus}"
                        TextColor="Red"
                        FontSize="15"/>
 

@@ -165,7 +165,7 @@ namespace EcoSave.Utilities
                 {
                     foreach (Submission submission in submissions)
                     {
-                        if (submission.Recycler == collector.Username)
+                        if (submission.Collector == collector.Username)
                             submissionsList.Add(submission);
                     }
                     return submissionsList;

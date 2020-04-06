@@ -97,7 +97,8 @@ namespace EcoSave.ViewModel
             set
             {
                 selectedCollector = value;
-                Submission.Collector = selectedCollector.Username;
+                if(selectedCollector != null)
+                    Submission.Collector = selectedCollector.Username;
                 CanPropose = CheckFields();
                 selectedCollector = null;
                 OnPropertyChanged();
@@ -138,8 +139,6 @@ namespace EcoSave.ViewModel
         {
             get 
             {
-                if (Material != null)
-                    return Material.MaterialName;
                 return materialName; 
             }
             set 
@@ -157,8 +156,6 @@ namespace EcoSave.ViewModel
         {
             get
             {
-                if (Recycler != null)
-                    return Recycler.Username;
                 return recyclerUsername;
             }
             set
@@ -181,25 +178,26 @@ namespace EcoSave.ViewModel
         public ICommand CreateSubmission { get; set; }
         public SubmissionViewModel()
         {
-            CollectorList = new ObservableCollection<Collector>();
-            Recycler = new Recycler();
-            Collector = new Collector();
-            GetCollectorList();
-            ProposeSubmission = new Command(ProposeSubmissionExecute, CanProposeM);
-            UpdateSubmission = new Command(UpdateSubmissionExecute, CanUpdateM);
-            CreateSubmission = new Command(CreateSubmissionExecute, CanCreateM);
-            if(Material == default(Material))
-            {
-                Material = new Material();
-            }
-            if(Submission == default(Submission))
-            {
-                Submission = new Submission();
-            }
-            else
-            {
-                InitializeFromSubmission();
-            }
+                CollectorList = new ObservableCollection<Collector>();
+                Recycler = new Recycler();
+                Collector = new Collector();
+                ProposeSubmission = new Command(ProposeSubmissionExecute, CanProposeM);
+                UpdateSubmission = new Command(UpdateSubmissionExecute, CanUpdateM);
+                CreateSubmission = new Command(CreateSubmissionExecute, CanCreateM);
+                if (Material == default(Material))
+                {
+                    Material = new Material();
+                }
+                if (Submission == default(Submission))
+                {
+                    Submission = new Submission();
+                }
+                else
+                {
+                    InitializeFromSubmission();
+                }
+                if(RecyclerViewModel.Recycler != null && Material != null)
+                    GetCollectorList();
         }
 
         private async void GetCollectorList()
@@ -208,6 +206,7 @@ namespace EcoSave.ViewModel
         }
         private async void ProposeSubmissionExecute(object obj)
         {
+            Submission.SubmissionID = Guid.NewGuid().ToString(); 
             Submission.Recycler = RecyclerViewModel.Recycler.Username;
             Submission.Status = StatusProposed;
             Submission.Material = Material.MaterialID;
@@ -223,24 +222,34 @@ namespace EcoSave.ViewModel
         private async void UpdateSubmissionExecute(object obj)
         {
             UpdateStatus = string.Empty;
-            if (MaterialName.ToLower() != Material.MaterialName.ToLower())
-            {
-                Material = await MaterialDA.GetMaterialByName(MaterialName);
-            }
-            if (Material != null)
-            {
-                UpdateSubmissionForAll();
-                await Application.Current.MainPage.DisplayAlert("Record Material Submission", "You have successfully updated the submission.", "OK");
-                await Application.Current.MainPage.Navigation.PopAsync();
-            }
-            else
-            {
-                UpdateStatus = "Recycled Material Type not found!";
-            }
+            Material material = new Material();
+                    if (MaterialName.ToLower() != Material.MaterialName.ToLower())
+                    {
+                        material = await MaterialDA.GetMaterialByName(MaterialName);
+                    }
+            if (material != null)
+                {
+                    if (CollectorViewModel.Collector.MaterialCollection.Contains(material.MaterialID))
+                    {
+                    Material = material;
+                    UpdateSubmissionForAll();
+                        await Application.Current.MainPage.DisplayAlert("Record Material Submission", "You have successfully updated the submission.", "OK");
+                        await Application.Current.MainPage.Navigation.PopAsync();
+                    }
+                    else
+                    {
+                        UpdateStatus = "You do not collect this type of material!";
+                    }
+                }
+                else
+                {
+                    UpdateStatus = "Recycled Material Type not found!";
+                }
         }
 
         private async void UpdateSubmissionForAll()
         {
+            Submission.Material = Material.MaterialID;
             Submission.Status = StatusSubmitted;
             Submission.PointsAwarded = WeightInKg * Material.PointsPerKg;
             Submission.ActualDate = DateTime.Today;
@@ -278,23 +287,38 @@ namespace EcoSave.ViewModel
             CreateStatus = string.Empty;
             Recycler = await RecyclerDA.GetRecyclerByUsername(RecyclerUsername);
             Material = await MaterialDA.GetMaterialByName(MaterialName);
-            if (Material == null)
+            Collector = CollectorViewModel.Collector;
+            if (Recycler == null)
             {
-                CreateStatus = "Recycled Material Type not found!";
+                CreateStatus = "Recycler not found!";
             }
             else
             {
-                if(Recycler == null)
+                if (Material == null)
                 {
-                    CreateStatus = "Recycler not found!";
+                    CreateStatus = "Recycled Material Type not found!";
                 }
                 else
                 {
-                    Submission.Recycler = Recycler.Username;
-                    Submission.Material = Material.MaterialName;
-                    UpdateSubmissionForAll();
-                    await Application.Current.MainPage.DisplayAlert("Record Material Submission", "You have successfully recorded the submission.", "OK");
-                    await Application.Current.MainPage.Navigation.PopAsync();
+                    if (Collector.MaterialCollection.Contains(Material.MaterialID))
+                    {
+                        Submission.Recycler = Recycler.Username;
+                        Submission.ProposedDate = DateTime.Today;
+                        Submission.Collector = Collector.Username;
+                        Submission.SubmissionID = Guid.NewGuid().ToString();
+                        Submission.Status = StatusProposed;
+                        Submission.Material = Material.MaterialID;
+                        await SubmissionDA.AddSubmission(Submission);
+                        UpdateSubmissionForAll();
+                        await Application.Current.MainPage.DisplayAlert("Record Material Submission", "You have successfully recorded the submission.", "OK");
+                        await Application.Current.MainPage.Navigation.PopAsync();
+
+                    }
+                    else
+                    {
+                        CreateStatus = "You do not collect this type of material!";
+                    }
+
                 }
             }
         }
@@ -306,8 +330,12 @@ namespace EcoSave.ViewModel
         private async void InitializeFromSubmission()
         {
             Recycler = await RecyclerDA.GetRecyclerByUsername(Submission.Recycler);
+            if(Recycler != null)
+                RecyclerUsername = Recycler.Username;
             Collector = await CollectorDA.GetCollectorByUsername(Submission.Collector);
             Material = await MaterialDA.GetMaterialById(Submission.Material);
+            if (Material != null)
+                MaterialName = Material.MaterialName;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

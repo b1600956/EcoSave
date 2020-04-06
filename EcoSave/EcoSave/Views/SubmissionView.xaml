@@ -11,10 +11,16 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:SelectSubmissionVM x:Key="SSVM" />
+            <local:MaterialIdToNameConverter x:Key="nameConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
-
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" 
+                     BindingContext="{StaticResource Key=SSVM}"
+                     Command="{Binding CreateSubmission}"
+                     />
+    </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
         <StackLayout BindingContext="{StaticResource SSVM}"
@@ -24,7 +30,9 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.1*"/>
-                    <RowDefinition Height="0.9*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.7*"/>
+                    <RowDefinition Height="0.1*"/>
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
@@ -33,17 +41,34 @@
                     <ColumnDefinition Width="0.5*"/>
                     <ColumnDefinition Width="0.5*"/>
                 </Grid.ColumnDefinitions>
-
-                <Label Text="Propose Date"/>
-                <Label Text="Material Name"
-                       Grid.Column="1"/>
-                <Label Text="Status" Grid.Column="2"/>
-                <Label Text="Submission ID" Grid.Column="3"/>
+                <SearchBar Placeholder="Search items..."
+                           x:Name="searchBar"
+                           CancelButtonColor="Orange"
+                           PlaceholderColor="Orange"
+                           TextColor="Orange"
+                           HorizontalTextAlignment="Center"
+                           FontSize="Medium"
+                           FontAttributes="Italic"
+                           Grid.Row="0"
+                           Grid.ColumnSpan="4"
+                           SearchCommand="{Binding SearchSubmission, Mode=TwoWay}"
+                           SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
+                <Label Text="Recycler"
+                       Grid.Row="1"/>
+                <Label Text="Material"
+                       Grid.Column="1"
+                       Grid.Row="1"/>
+                <Label Text="Proposed Date" 
+                       Grid.Row="1"
+                       Grid.Column="2"/>
+                <Label Text="Status" 
+                       Grid.Row="1"
+                       Grid.Column="3"/>
                 
                 <ListView x:Name="MyListView"
-                          ItemsSource="{Binding SubmissionList}"
+                          ItemsSource="{Binding SubmissionList,Mode=TwoWay}"
                           SelectedItem="{Binding SelectedSubmission,Mode=OneWayToSource}"
-                          Grid.Row="1"
+                          Grid.Row="2"
                           Grid.ColumnSpan="4"
                           CachingStrategy="RecycleElement">
                     <ListView.ItemTemplate>
@@ -60,19 +85,20 @@
                                         <ColumnDefinition Width="0.5*"/>
                                     </Grid.ColumnDefinitions>
                                     <Label Grid.Row="0"
-                                           Text="{Binding ProposedDate}"/>
+                                           Grid.Column="0"                                          
+                                           Text="{Binding Recycler}"/>
+                                    
+                                    <Label Grid.Row="0"
+                                           Grid.Column="1"                                          
+                                           Text="{Binding Material, Converter={StaticResource nameConverter}}"/>
+                                    
+                                    <Label Grid.Row="0"
+                                           Grid.Column="2"
+                                           Text="{Binding ProposedDate, StringFormat='{0:MMMM d, yyyy}'}"/>
 
                                     <Label Grid.Row="0"
-                                           Grid.Column="1"
-                                           Text="{Binding Material}"/>
-
-                                    <Label Grid.Row="0"
-                                           Grid.Column="2"                                          
+                                           Grid.Column="3"
                                            Text="{Binding Status}"/>
-
-                                    <Label Grid.Row="0"
-                                           Grid.Column="3"                                          
-                                           Text="{Binding SubmissionID}"/>  
 
                                 </Grid>
                             </ViewCell>
@@ -80,6 +106,13 @@
                     </ListView.ItemTemplate>
 
                 </ListView>
+                <Label Grid.Row="3"
+                       Grid.ColumnSpan="4"
+                       Margin="30,0"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                       Text="{Binding SearchResult}"
+                       FontSize="15"/>
             </Grid>
 
         </StackLayout>

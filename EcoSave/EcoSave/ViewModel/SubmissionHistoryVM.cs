@@ -26,16 +26,27 @@ namespace EcoSave.ViewModel
             }
         }
 
-        private bool can;
-        public bool Can
+        private string selectedSort;
+
+        public string SelectedSort
         {
             get
             {
-                return can;
+                return selectedSort;
             }
             set
             {
-                can = value;
+                selectedSort = value;
+                if (selectedSort != null)
+                {
+                    if(selectedSort == "Actual Date")
+                    {
+                        SortSubmissionsByActualDate.Execute(null);
+                    }else if(selectedSort == "Status")
+                    {
+                        SortSubmissionsByStatus.Execute(null);
+                    }
+                }
                 OnPropertyChanged();
             }
         }
@@ -60,6 +71,18 @@ namespace EcoSave.ViewModel
             }
         }
 
+        private ObservableCollection<string> sortList;
+
+        public ObservableCollection<string> SortList
+        {
+            get { return sortList; }
+            set
+            {
+                sortList = value;
+                OnPropertyChanged();
+            }
+        }
+
         private ObservableCollection<Submission> submissionsList;
 
         public ObservableCollection<Submission> SubmissionList
@@ -76,47 +99,57 @@ namespace EcoSave.ViewModel
         public SubmissionHistoryVM()
         {
             SubmissionList = new ObservableCollection<Submission>();
-            SortSubmissionsByActualDate = new Command(SortSubmissionsByActualDateExecute, CanM);
-            SortSubmissionsByStatus = new Command(SortSubmissionsByStatusExecute, CanM);
+            SortList = new ObservableCollection<string>();
+            SortSubmissionsByActualDate = new Command(SortSubmissionsByActualDateExecute);
+            SortSubmissionsByStatus = new Command(SortSubmissionsByStatusExecute);
+            GetSortList();
             GetSubmissionList();
-            if (Can)
-            {
-                GetTotalWeightAndPoints();
-            }  
+        }
+
+        private async void GetSortList()
+        {
+            SortList.Add("Actual Date");
+            SortList.Add("Status");
+            //await SubmissionDA.GetAllSubmissions();
         }
 
         private void SortSubmissionsByActualDateExecute(object obj)
         {
-            SubmissionList = new ObservableCollection<Submission>((new List<Submission>(SubmissionList)).OrderBy(s => s.ActualDate));
+            if(SubmissionList != null) {
+                List<Submission> sortedList = (new List<Submission>(SubmissionList)).OrderBy(s => s.ActualDate).ToList();
+                SubmissionList = new ObservableCollection<Submission>(sortedList);
+            }
         }
 
         private void SortSubmissionsByStatusExecute(object obj)
         {
-            SubmissionList = new ObservableCollection<Submission>((new List<Submission>(SubmissionList)).OrderBy(s => s.Status));
-        }
-
-        private bool CanM(object arg)
-        {
-            return Can;
+            if (SubmissionList != null)
+            {
+                List<Submission> sortedList= (new List<Submission>(SubmissionList)).OrderBy(s => s.Status).ToList();
+                SubmissionList = new ObservableCollection<Submission>(sortedList);
+            }
         }
 
         private void GetTotalWeightAndPoints()
         {
             TotalWeight = 0;
             TotalPoints = 0;
-            foreach(Submission submission in SubmissionList)
+            if (SubmissionList != null)
             {
-                TotalWeight += submission.WeightInKg;
-                TotalPoints += submission.PointsAwarded;
+                foreach (Submission submission in SubmissionList)
+                {
+                    TotalWeight += submission.WeightInKg;
+                    TotalPoints += submission.PointsAwarded;
+                }
             }
         }
 
         private async void GetSubmissionList()
         {
-            if (LoginViewModel.UserType == StartViewModel.AdminUserType)
-            {
-                SubmissionList = await SubmissionDA.GetSubmissionsByMaterial(Material);
-            }
+                if (LoginViewModel.UserType == StartViewModel.AdminUserType)
+                {
+                    SubmissionList = await SubmissionDA.GetSubmissionsByMaterial(Material);
+                }
             else if (LoginViewModel.UserType == StartViewModel.CollectorUserType)
             {
                 SubmissionList = await SubmissionDA.GetSubmissionsForCollector(Material, CollectorViewModel.Collector);
@@ -125,11 +158,11 @@ namespace EcoSave.ViewModel
             {
                 SubmissionList = await SubmissionDA.GetSubmissionsForRecycler(Material, RecyclerViewModel.Recycler);
             }
-            if(SubmissionList.Count == 0)
+            if (SubmissionList.Count == 0)
             {
                 SubmissionHistroryResult = "No Submission History for " + Material.MaterialName;
-                Can = false;
             }
+            GetTotalWeightAndPoints();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

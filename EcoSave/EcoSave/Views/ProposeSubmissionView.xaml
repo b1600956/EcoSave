@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:sys="clr-namespace:System;assembly=netstandard"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              xmlns:local="clr-namespace:EcoSave.ViewModel"
@@ -10,42 +11,45 @@
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <local:ManageMaterialVM x:Key="MMVM" />
+            <local:SubmissionViewModel x:Key="SVM" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" 
-                     BindingContext="{StaticResource Key=MMVM}"
-                     Command="{Binding AddNewMaterial}"
-                     />
-    </ContentPage.ToolbarItems>
-
     <ContentPage.Content>
-        <StackLayout BindingContext="{StaticResource MMVM}"
+        <StackLayout BindingContext="{StaticResource SVM}"
                      Margin="10"
                      Padding="10">
 
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="0.05*"/>
                     <RowDefinition Height="0.1*"/>
-                    <RowDefinition Height="0.9*"/>
+                    <RowDefinition Height="0.05*"/>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="0.07*"/>
+                    <RowDefinition Height="0.1*"/>
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.5*"/>
                     <ColumnDefinition Width="0.5*"/>
-                    <ColumnDefinition Width="0.5*"/>
-                    <ColumnDefinition Width="0.5*"/>
                 </Grid.ColumnDefinitions>
-
-                <Label Text="Collector's Name"/>
+                <Label Text="Select date to recycle"/>
+                <DatePicker
+                    Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    MinimumDate="{x:Static sys:DateTime.Today}"
+                    Date="{Binding ProposedDate,Mode=OneWayToSource}"
+                    />
+                <Label 
+                    Grid.Row="2"
+                    Text="Collectors"/>
                           
                 <ListView x:Name="MyListView"
-                          ItemsSource="{Binding MaterialList}"
-                          SelectedItem="{Binding SelectedMaterial,Mode=OneWayToSource}"
-                          Grid.Row="1"
-                          Grid.ColumnSpan="4"
+                          ItemsSource="{Binding CollectorList}"
+                          SelectedItem="{Binding SelectedCollector,Mode=OneWayToSource}"
+                          Grid.Row="3"
+                          Grid.ColumnSpan="2"
                           CachingStrategy="RecycleElement">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -57,26 +61,30 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="0.5*"/>
                                         <ColumnDefinition Width="0.5*"/>
-                                        <ColumnDefinition Width="0.5*"/>
-                                        <ColumnDefinition Width="0.5*"/>
                                     </Grid.ColumnDefinitions>
                                     <Label Grid.Row="0"
-                                           Text="{Binding MaterialID}"/>
+                                           Text="{Binding Username}"/>
 
                                     <Label Grid.Row="0"
                                            Grid.Column="1"
-                                           Text="{Binding MaterialName}"/>
-
-                                    
-
+                                           Text="{Binding Address}"/>
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-
                 </ListView>
+                <Button Grid.Row="4"
+                        Grid.ColumnSpan="2"
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand"
+                        Text="Submit"
+                        FontSize="20"
+                        TextColor="PowderBlue"
+                        BackgroundColor="Goldenrod"
+                        Command="{Binding ProposeSubmission}"
+                        CommandParameter="{Binding CanPropose}"/>
             </Grid>
-
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

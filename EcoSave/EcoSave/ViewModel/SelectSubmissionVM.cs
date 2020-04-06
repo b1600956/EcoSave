@@ -45,13 +45,25 @@ namespace EcoSave.ViewModel
             }
         }
 
+        private ObservableCollection<Submission> allSubmissionList;
+
+        public ObservableCollection<Submission> AllSubmissionList
+        {
+            get { return allSubmissionList; }
+            set 
+            { 
+                allSubmissionList = value;
+                OnPropertyChanged();
+            }
+        }
+
         private ObservableCollection<Submission> submissionList;
 
         public ObservableCollection<Submission> SubmissionList
         {
             get { return submissionList; }
-            set 
-            { 
+            set
+            {
                 submissionList = value;
                 OnPropertyChanged();
             }
@@ -71,6 +83,7 @@ namespace EcoSave.ViewModel
 
         private async void GetSubmissionList()
         {
+            AllSubmissionList = await SubmissionDA.GetProposedSubmissionsByCollector(CollectorViewModel.Collector);
             SubmissionList = await SubmissionDA.GetProposedSubmissionsByCollector(CollectorViewModel.Collector);
         }
 
@@ -78,7 +91,7 @@ namespace EcoSave.ViewModel
         {
             SearchResult = string.Empty;
             ObservableCollection<Submission> newSubmissionList = new ObservableCollection<Submission>();
-            foreach(Submission submission in SubmissionList)
+            foreach (Submission submission in AllSubmissionList)
             {
                 if(submission.Recycler == query)
                 {
@@ -100,7 +113,7 @@ namespace EcoSave.ViewModel
 
         private void CreateSubmissionExecute(object obj)
         {
-            Application.Current.MainPage.Navigation.PushAsync(new Views.RecordMaterialView());
+            Application.Current.MainPage.Navigation.PushAsync(new Views.CreateRecordView());
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

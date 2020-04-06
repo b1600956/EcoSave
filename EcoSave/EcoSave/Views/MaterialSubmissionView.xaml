@@ -9,14 +9,14 @@
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <local:RecycleMaterialVM x:Key="RMVM" />
+            <local:MaterialSubmissionVM x:Key="MSVM" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
 
 
     <ContentPage.Content>
-        <StackLayout BindingContext="{StaticResource RMVM}"
+        <StackLayout BindingContext="{StaticResource MSVM}"
                      Margin="10"
                      Padding="10">
 

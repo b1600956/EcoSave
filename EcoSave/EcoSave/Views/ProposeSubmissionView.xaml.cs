@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EcoSave.Utilities;
+using EcoSave.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +17,12 @@ namespace EcoSave.Views
         public ProposeSubmissionView()
         {
             InitializeComponent();
+        }
+
+        protected async override void OnAppearing()
+        {
+            base.OnAppearing();
+            MyListView.ItemsSource = await CollectorDA.GetCollectorsByUsername(SubmissionViewModel.Material.CollectorList);
         }
     }
 }
