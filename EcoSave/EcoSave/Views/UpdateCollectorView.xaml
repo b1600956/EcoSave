@@ -5,7 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:EcoSave.ViewModel"
              mc:Ignorable="d"
-             x:Class="EcoSave.Views.UpdateCollectorView">
+             x:Class="EcoSave.Views.UpdateCollectorView"
+             BackgroundColor="#29D959">
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:CollectorViewModel x:Key="CVM" />
@@ -16,7 +17,7 @@
         <StackLayout BindingContext="{StaticResource CVM}"
                      Margin="10"
                      Padding="10"
-                     BackgroundColor="Orange">
+                     BackgroundColor="white">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.1*"/>
@@ -82,9 +83,12 @@
 
                 <Button Grid.Row="8"
                         Grid.ColumnSpan="2"
-                        CornerRadius="10"
+                        Margin="50,0"
                         Text="Update"
                         FontSize="20"
+                        TextColor="black"
+                        CornerRadius="20"
+                        BackgroundColor="#29D959"
                         Command="{Binding UpdateCollector}"
                         CommandParameter="{Binding CanUpdate}"/>
 

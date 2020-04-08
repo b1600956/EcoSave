@@ -34,7 +34,9 @@
                     <ColumnDefinition Width="0.5*"/>
                     <ColumnDefinition Width="0.5*"/>
                 </Grid.ColumnDefinitions>
-                <Label Text="Select date to recycle"/>
+                <Label Text="Select date to recycle"
+                       FontAttributes="Bold"
+                       TextColor="black"/>
                 <DatePicker
                     Grid.Row="1"
                     Grid.ColumnSpan="2"
@@ -79,8 +81,10 @@
                         HorizontalOptions="FillAndExpand"
                         Text="Submit"
                         FontSize="20"
-                        TextColor="PowderBlue"
-                        BackgroundColor="Goldenrod"
+                        TextColor="black"
+                        FontAttributes="Bold"
+                        CornerRadius="20"
+                        BackgroundColor="#29D959"
                         Command="{Binding ProposeSubmission}"
                         CommandParameter="{Binding CanPropose}"/>
             </Grid>

@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              xmlns:local="clr-namespace:EcoSave.ViewModel"
              x:Class="EcoSave.Views.MaterialDetailView"
-             BackgroundColor="SaddleBrown">
+             BackgroundColor="#29D959">
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:MaterialViewModel x:Key="MVM" />
@@ -17,7 +17,7 @@
         <StackLayout BindingContext="{StaticResource MVM}"
                      Margin="10"
                      Padding="10"
-                     BackgroundColor="Orange">
+                     BackgroundColor="white">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.1*"/>
@@ -82,16 +82,25 @@
 
                 <Button Grid.Row="8"
                         Grid.ColumnSpan="2"
-                        CornerRadius="10"
+                        CornerRadius="20"
+                        Margin="50,0"
                         Text="Update"
+                        TextColor="white"
+                        FontAttributes="Bold"
                         FontSize="20"
+                        BackgroundColor="#29D959"
                         Command="{Binding UpdateMaterial}"
                         CommandParameter="{Binding CanAdd}"/>
 
                 <Button Grid.Row="9"
                         Grid.ColumnSpan="2"
-                        CornerRadius="10"
+                        Margin="50,0"
+                        CornerRadius="20"
                         Text="Delete"
+                        FontAttributes="Bold"
+                        
+                        TextColor="White"
+                        BackgroundColor="Red"
                         FontSize="20"
                         Command="{Binding DeleteMaterial}" />
 

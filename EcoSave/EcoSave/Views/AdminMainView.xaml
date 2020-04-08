@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              xmlns:local="clr-namespace:EcoSave.ViewModel"
              x:Class="EcoSave.Views.AdminMainView"
-             BackgroundColor="SaddleBrown">
+             BackgroundColor="#229EC8">
     
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -21,8 +21,8 @@
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
-        <StackLayout Margin="20"
-                     BackgroundColor="Wheat"
+        <StackLayout Margin="7"
+                     BackgroundColor="White"
                      Padding="10"
                      BindingContext="{StaticResource Key=MVM}">
 
@@ -47,30 +47,33 @@
                        HorizontalOptions="Center"
                        VerticalOptions="Center"
                        FontSize="30"
-                       Text="Admin MainPage"
+                       Text="Welcome Admin!"
+                       FontAttributes="Bold"
                        TextColor="Black"/>
 
                 <Button Grid.Row="2"
                         Grid.ColumnSpan="2"
-                        Margin="30,0"
+                        Margin="50,0"
                         VerticalOptions="FillAndExpand"
                         HorizontalOptions="FillAndExpand"
                         Text="Manage Material"
                         FontSize="20"
                         TextColor="Black"
-                        BackgroundColor="orange"
+                        CornerRadius="20"
+                        BackgroundColor="#229EC8"
                         Command="{Binding OpenManageMaterialView}"/>
 
 
-                <Button Grid.Row="3"
+                <Button Grid.Row="4"
                         Grid.ColumnSpan="2"
-                        Margin="30,0"
+                        Margin="50,0"
                         VerticalOptions="FillAndExpand"
                         HorizontalOptions="FillAndExpand"
                         Text="View Submission History"
                         FontSize="20"
                         TextColor="black"
-                        BackgroundColor="orange" 
+                        CornerRadius="20"
+                        BackgroundColor="#229EC8" 
                         Command="{Binding OpenMaterialSubmissionView}"/>
 
             </Grid>

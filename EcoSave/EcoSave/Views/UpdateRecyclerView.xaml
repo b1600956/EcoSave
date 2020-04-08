@@ -5,7 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:EcoSave.ViewModel"
              mc:Ignorable="d"
-             x:Class="EcoSave.Views.UpdateRecyclerView">
+             x:Class="EcoSave.Views.UpdateRecyclerView"
+             BackgroundColor="#29D959">
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:RecyclerViewModel x:Key="RVM" />
@@ -16,7 +17,7 @@
         <StackLayout BindingContext="{StaticResource RVM}"
                      Margin="10"
                      Padding="10"
-                     BackgroundColor="Orange">
+                     BackgroundColor="white">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.1*"/>
@@ -82,9 +83,13 @@
 
                 <Button Grid.Row="8"
                         Grid.ColumnSpan="2"
-                        CornerRadius="10"
+                        Margin="50,0"
                         Text="Update"
                         FontSize="20"
+                        FontAttributes="Bold"
+                        TextColor="black"
+                        CornerRadius="20"
+                        BackgroundColor="#29D959"
                         Command="{Binding UpdateRecycler}"
                         CommandParameter="{Binding CanUpdate}"/>
 

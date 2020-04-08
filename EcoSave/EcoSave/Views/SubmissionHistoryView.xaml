@@ -39,6 +39,7 @@
                 </Grid.ColumnDefinitions>
                 <Label Text="Submission History"
                        Grid.ColumnSpan="5"
+                       FontAttributes="Bold"
                        FontSize="20"/>
                 <Label Text="Total Weight:"
                        Grid.Row="1"/>

@@ -5,7 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              xmlns:local="clr-namespace:EcoSave.ViewModel"
-             x:Class="EcoSave.Views.CreateRecordView">
+             x:Class="EcoSave.Views.CreateRecordView"
+             BackgroundColor="#29D959">
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:SubmissionViewModel x:Key="SVM"/>
@@ -13,8 +14,8 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout Margin="20"
-                     BackgroundColor="Wheat"
+        <StackLayout Margin="7"
+                     BackgroundColor="White"
                      Padding="10"
                      BindingContext="{StaticResource Key=SVM}">
 
@@ -39,6 +40,7 @@
                        VerticalOptions="Center"
                        FontSize="30"
                        Text="Submitted Material"
+                       FontAttributes="Bold"
                        TextColor="Black"/>
                 <Label Grid.Row="1"
                        HorizontalOptions="Start"
@@ -89,12 +91,14 @@
 
                 <Button Grid.Row="5"
                         Grid.ColumnSpan="2"
+                        Margin="50,0"
                         VerticalOptions="CenterAndExpand"
                         HorizontalOptions="FillAndExpand"
                         Text="Submitted"
                         FontSize="20"
-                        TextColor="PowderBlue"
-                        BackgroundColor="Goldenrod"
+                        TextColor="black"
+                        CornerRadius="20"
+                        BackgroundColor="#29D959"
                         Command="{Binding CreateSubmission}"
                         CommandParameter="{Binding CanCreate}"/>
 

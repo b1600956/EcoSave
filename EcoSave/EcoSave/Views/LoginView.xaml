@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              xmlns:local="clr-namespace:EcoSave.ViewModel"
              x:Class="EcoSave.Views.LoginView"
-             BackgroundColor="SaddleBrown">
+             BackgroundColor="#29D959">
     
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -15,9 +15,10 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout Margin="20"
-                     BackgroundColor="Wheat"
+        <StackLayout Margin="7"
+                     BackgroundColor="white"
                      Padding="10"
+                     
                      BindingContext="{StaticResource Key=LVM}">
 
             <Grid>
@@ -36,13 +37,15 @@
                     <ColumnDefinition Width="0.25*"/>
                 </Grid.ColumnDefinitions>
 
+                
                 <Label Grid.ColumnSpan="2"
                        HorizontalOptions="Center"
                        VerticalOptions="Center"
                        FontSize="30"
                        Text="Login"
+                       FontAttributes="Bold"
                        TextColor="Black"/>
-
+                
                 <Label Grid.Row="1"
                        HorizontalOptions="Start"
                        VerticalOptions="Center"
@@ -51,14 +54,14 @@
                        FontSize="20"
                        TextColor="Black"/>
 
-                <Entry Grid.Row="1"
+                    <Entry Grid.Row="1"
                        Grid.Column="1"
                        Placeholder="Enter Username"
                        FontSize="20"
                        TextColor="Blue"
                        Text="{Binding Username, Mode=TwoWay}"/>
 
-                <Label Grid.Row="2"
+                    <Label Grid.Row="2"
                        HorizontalOptions="Start"
                        VerticalOptions="Center"
                        Grid.Column="0"
@@ -66,7 +69,7 @@
                        FontSize="20"
                        TextColor="Black"/>
 
-                <Entry Grid.Row="2"
+                    <Entry Grid.Row="2"
                        Grid.Column="1"
                        Placeholder="Enter Password"
                        FontSize="20"
@@ -74,39 +77,43 @@
                        Text="{Binding Password}"
                        IsPassword="{Binding ShowPassword}"/>
 
-                <StackLayout
+                    <StackLayout
                     Orientation="Horizontal"
                     Grid.Row="3"
                     Grid.Column="1">
-                    <CheckBox IsChecked="{Binding ShowPassword, Mode=OneWayToSource}"
+                        <CheckBox IsChecked="{Binding ShowPassword, Mode=OneWayToSource}"
                               VerticalOptions="Center"/>
-                    <Label
+                        <Label
                         Text="show password"
                         FontSize="15"
                         VerticalOptions="Center"/>
-                </StackLayout>
+                    </StackLayout>
 
-                <Button Grid.Row="5"
+                    <Button Grid.Row="5"
                         VerticalOptions="FillAndExpand"
                         HorizontalOptions="FillAndExpand"
                         Text="Sign Up"
                         FontSize="20"
-                        TextColor="PowderBlue"
-                        BackgroundColor="Goldenrod"
-                        Command="{Binding OpenSignUpView}"/>
+                        TextColor="Black"
+                        BackgroundColor="#29D959"
+                        CornerRadius="20"
+                            FontAttributes="Bold"
+                        Command="{Binding OpenSignUpView}" AutomationProperties.Name=""/>
 
-                <Button Grid.Row="5"
+                    <Button Grid.Row="5"
                         Grid.Column="1"
                         VerticalOptions="FillAndExpand"
                         HorizontalOptions="FillAndExpand"
                         Text="Login"
                         FontSize="20"
-                        TextColor="PowderBlue"
-                        BackgroundColor="Goldenrod"
+                        TextColor="Black"
+                        BackgroundColor="#29D959"
+                            FontAttributes="Bold"
+                        CornerRadius="20"
                         Command="{Binding SignIn}"
                         CommandParameter="{Binding CanSign}"/>
 
-                <Label Grid.Row="6"
+                    <Label Grid.Row="6"
                        Grid.ColumnSpan="2"
                        Margin="30,0"
                        HorizontalOptions="Start"
@@ -114,6 +121,7 @@
                        Text="{Binding LoginStatus}"
                        FontSize="15"
                        TextColor="Red"/>
+                
             </Grid>
         </StackLayout>
     </ContentPage.Content>

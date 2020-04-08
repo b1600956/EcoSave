@@ -5,7 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              xmlns:local="clr-namespace:EcoSave.ViewModel"
-             x:Class="EcoSave.Views.CollectorMainView">
+             x:Class="EcoSave.Views.CollectorMainView"
+             BackgroundColor="#29D959">
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:CollectorViewModel x:Key="CVM"/>
@@ -19,8 +20,8 @@
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <StackLayout Margin="20"
-                     BackgroundColor="Wheat"
+        <StackLayout Margin="7"
+                     BackgroundColor="White"
                      Padding="10"
                      BindingContext="{StaticResource Key=CVM}">
 
@@ -45,51 +46,57 @@
                        HorizontalOptions="Center"
                        VerticalOptions="Center"
                        FontSize="30"
-                       Text="Collector MainPage"
+                       FontAttributes="Bold"
+                       Text="Welcome Collector!"
                        TextColor="Black"/>
 
                 <Button Grid.Row="2"
                         Grid.ColumnSpan="2"
-                        Margin="30,0"
+                        Margin="50,0"
                         VerticalOptions="FillAndExpand"
                         HorizontalOptions="FillAndExpand"
                         Text="Available material"
                         FontSize="20"
                         TextColor="Black"
-                        BackgroundColor="orange"
+                        CornerRadius="20"
+                        BackgroundColor="#29D959"
                         Command="{Binding OpenAddCollectionView}"/>
                 
 
                 <Button Grid.Row="3"
                         Grid.ColumnSpan="2"
-                        Margin="30,0"
+                        Margin="50,0"
                         VerticalOptions="FillAndExpand"
                         HorizontalOptions="FillAndExpand"
                         Text="Profile"
                         FontSize="20"
                         TextColor="black"
-                        BackgroundColor="orange" 
+                        CornerRadius="20"
+                        BackgroundColor="#29D959" 
                         Command="{Binding OpenUpdateCollectorView}"/>
                 <Button Grid.Row="4"
                         Grid.ColumnSpan="2"
-                        Margin="30,0"
+                        Margin="50,0"
                         VerticalOptions="FillAndExpand"
                         HorizontalOptions="FillAndExpand"
                         Text="Record Material Submission"
-                        FontSize="20"
+                        FontSize="15"
                         TextColor="black"
-                        BackgroundColor="orange" 
+                        
+                        CornerRadius="20"
+                        BackgroundColor="#29D959" 
                         Command="{Binding OpenSubmissionView}"/>
 
                 <Button Grid.Row="5"
                         Grid.ColumnSpan="2"
-                        Margin="30,0"
+                        Margin="50,0"
                         VerticalOptions="FillAndExpand"
                         HorizontalOptions="FillAndExpand"
                         Text="Submission History"
                         FontSize="20"
                         TextColor="black"
-                        BackgroundColor="orange" 
+                        CornerRadius="20"
+                        BackgroundColor="#29D959" 
                         Command="{Binding OpenMaterialSubmissionView}"/>
 
             </Grid>

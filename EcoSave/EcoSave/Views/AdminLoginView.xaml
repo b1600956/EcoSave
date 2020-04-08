@@ -5,7 +5,9 @@
              xmlns:local="clr-namespace:EcoSave.ViewModel"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="EcoSave.Views.AdminLoginView">
+             x:Class="EcoSave.Views.AdminLoginView"
+             BackgroundColor="#229EC8">
+             
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:LoginViewModel x:Key="LVM"/>
@@ -13,8 +15,8 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout Margin="20"
-                     BackgroundColor="Wheat"
+        <StackLayout Margin="7"
+                     BackgroundColor="White"
                      Padding="10"
                      BindingContext="{StaticResource Key=LVM}">
 
@@ -38,7 +40,8 @@
                        HorizontalOptions="Center"
                        VerticalOptions="Center"
                        FontSize="30"
-                       Text="Login"
+                       Text="Eco Admin"
+                       FontAttributes="Bold"
                        TextColor="Black"/>
 
                 <Label Grid.Row="1"
@@ -86,13 +89,14 @@
 
                 <Button Grid.Row="5"
                         Grid.ColumnSpan="2"
-                        Margin="30, 0"
+                        Margin="50, 0"
                         VerticalOptions="FillAndExpand"
                         HorizontalOptions="FillAndExpand"
                         Text="Login"
                         FontSize="20"
-                        TextColor="PowderBlue"
-                        BackgroundColor="Goldenrod"
+                        TextColor="black"
+                        BackgroundColor="#229EC8"
+                        CornerRadius="20"
                         Command="{Binding SignIn}"
                         CommandParameter="{Binding CanSign}"/>
 

@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              xmlns:local="clr-namespace:EcoSave.ViewModel"
              x:Class="EcoSave.Views.StartView"
-             BackgroundColor="SaddleBrown">
+             BackgroundColor="#29D959">
     
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -15,8 +15,8 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout Margin="20"
-                     BackgroundColor="Wheat"
+        <StackLayout Margin="7"
+                     BackgroundColor="White"
                      Padding="10"
                      BindingContext="{StaticResource Key=SVM}">
 
@@ -36,48 +36,58 @@
                     <ColumnDefinition Width="0.25*"/>
                 </Grid.ColumnDefinitions>
 
+                
+                <Image Source="logo.png" VerticalOptions="End" />
+                
+          
                 <Label Grid.ColumnSpan="2"
                        HorizontalOptions="Center"
                        VerticalOptions="Center"
                        FontSize="30"
-                       Text="Register"
+                       FontAttributes="Bold"
+                       Text="Welcome to EcoSave"
                        TextColor="Black"/>
+
+                
 
                 <Button Grid.Row="1"
                         Grid.ColumnSpan="2"
-                        Margin="30,0"
+                        Margin="50,0"
                         VerticalOptions="FillAndExpand"
                         HorizontalOptions="FillAndExpand"
                         Text="Recycler"
                         FontSize="20"
-                        TextColor="PowderBlue"
-                        BackgroundColor="Green"
+                        TextColor="Black"
+                        CornerRadius="20"
+                        BackgroundColor="#29D959"
                         Command="{Binding UserAsRecycler}"/>
 
                 <Button Grid.Row="3"
                         Grid.ColumnSpan="2"
-                        Margin="30,0"
+                        Margin="50,0"
                         VerticalOptions="FillAndExpand"
                         HorizontalOptions="FillAndExpand"
                         Text="Collector"
                         FontSize="20"
-                        TextColor="PowderBlue"
-                        BackgroundColor="Firebrick"
+                        TextColor="Black"
+                        CornerRadius="20"
+                        BackgroundColor="#29D959"
                         Command="{Binding UserAsCollector}"/>
 
 
                 <Button Grid.Row="5"
                         Grid.ColumnSpan="2"
-                        Margin="30,0"
+                        Margin="50,0"
                         VerticalOptions="FillAndExpand"
                         HorizontalOptions="FillAndExpand"
                         Text="Eco Admin"
                         FontSize="20"
-                        TextColor="PowderBlue"
-                        BackgroundColor="Chocolate" 
+                        TextColor="Black"
+                        CornerRadius="20"
+                        BackgroundColor="#229EC8" 
                         Command="{Binding UserAsAdmin}"/>
-
-
+                
+                
 
             </Grid>
         </StackLayout>

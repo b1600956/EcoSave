@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              xmlns:local="clr-namespace:EcoSave.ViewModel"
              x:Class="EcoSave.Views.AddMaterialView"
-             BackgroundColor="SaddleBrown">
+             BackgroundColor="#29D959">
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:MaterialViewModel x:Key="MVM"/>
@@ -14,8 +14,8 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout Margin="20"
-                     BackgroundColor="Wheat"
+        <StackLayout Margin="07"
+                     BackgroundColor="White"
                      Padding="10"
                      BindingContext="{StaticResource Key=MVM}">
 
@@ -92,8 +92,8 @@
                         HorizontalOptions="CenterAndExpand"
                         Text="Add"
                         FontSize="20"
-                        TextColor="PowderBlue"
-                        BackgroundColor="Goldenrod"
+                        TextColor="Black"
+                        BackgroundColor="#29D959"
                         Command="{Binding UploadMaterial}"
                         CommandParameter="{Binding CanAdd}"/>
                 
