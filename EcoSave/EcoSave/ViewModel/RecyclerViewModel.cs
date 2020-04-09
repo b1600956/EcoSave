@@ -106,6 +106,26 @@ namespace EcoSave.ViewModel
             }
         }
 
+        public string EcoLevel
+        {
+            get { return Recycler.EcoLevel; }
+            set
+            {
+                Recycler.EcoLevel = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int TotalPoints
+        {
+            get { return Recycler.TotalPoints; }
+            set
+            {
+                Recycler.TotalPoints = value;
+                OnPropertyChanged();
+            }
+        }
+
         private bool CheckFields()
         {
             bool result = !string.IsNullOrWhiteSpace(Recycler.Username) &&
@@ -149,6 +169,7 @@ namespace EcoSave.ViewModel
                     Password = string.Empty;
                     FullName = string.Empty;
                     ConfirmPassword = string.Empty;
+                    await Application.Current.MainPage.DisplayAlert("Sign Up", "You have successfully created a Recycler account ", "OK");
                     await Application.Current.MainPage.Navigation.PopAsync();
                 }
                 else

@@ -102,6 +102,16 @@ namespace EcoSave.ViewModel
             }
         }
 
+        public int TotalPoints
+        {
+            get { return Collector.TotalPoints; }
+            set
+            {
+                Collector.TotalPoints = value;
+                OnPropertyChanged();
+            }
+        }
+
         public string Address
         {
             get { return Collector.Address; }
@@ -161,6 +171,7 @@ namespace EcoSave.ViewModel
                     FullName = string.Empty;
                     Address = string.Empty;
                     ConfirmPassword = string.Empty;
+                    await Application.Current.MainPage.DisplayAlert("Sign Up", "You have successfully created a Collector account ", "OK");
                     await Application.Current.MainPage.Navigation.PopAsync();
                 }
                 else

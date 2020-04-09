@@ -43,11 +43,19 @@
                 </Grid.ColumnDefinitions>
 
 
-                <Label Grid.ColumnSpan="2"
-                       HorizontalOptions="Center"
+                <Label 
+                       HorizontalOptions="End"
                        VerticalOptions="Center"
                        FontSize="30"
-                       Text="Welcome Admin!"
+                       Text="Welcome! "
+                       FontAttributes="Bold"
+                       TextColor="Black"/>
+
+                <Label Grid.Column="1"
+                       VerticalOptions="Center"
+                       FontSize="30"
+                       Text="{Binding Username}"
+                       Margin="15,0"
                        FontAttributes="Bold"
                        TextColor="Black"/>
 

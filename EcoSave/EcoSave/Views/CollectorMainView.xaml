@@ -50,7 +50,24 @@
                        Text="Welcome Collector!"
                        TextColor="Black"/>
 
-                <Button Grid.Row="2"
+                <Label Grid.Row="1"
+                       Grid.ColumnSpan="2"
+                       HorizontalOptions="Center"
+                       Text="{Binding FullName,Mode=TwoWay}"
+                       FontSize="20"/>
+
+                <Label Grid.Row="2"
+                       HorizontalOptions="End"
+                       Text="Total Points: "
+                       FontSize="20"/>
+
+                <Label Grid.Row="2"
+                       Grid.Column="1"
+                       Margin="15,0"
+                       Text="{Binding TotalPoints,Mode=TwoWay}"
+                       FontSize="20"/>
+
+                <Button Grid.Row="3"
                         Grid.ColumnSpan="2"
                         Margin="50,0"
                         VerticalOptions="FillAndExpand"
@@ -63,7 +80,7 @@
                         Command="{Binding OpenAddCollectionView}"/>
                 
 
-                <Button Grid.Row="3"
+                <Button Grid.Row="4"
                         Grid.ColumnSpan="2"
                         Margin="50,0"
                         VerticalOptions="FillAndExpand"
@@ -74,7 +91,8 @@
                         CornerRadius="20"
                         BackgroundColor="#29D959" 
                         Command="{Binding OpenUpdateCollectorView}"/>
-                <Button Grid.Row="4"
+                
+                <Button Grid.Row="5"
                         Grid.ColumnSpan="2"
                         Margin="50,0"
                         VerticalOptions="FillAndExpand"
@@ -87,7 +105,7 @@
                         BackgroundColor="#29D959" 
                         Command="{Binding OpenSubmissionView}"/>
 
-                <Button Grid.Row="5"
+                <Button Grid.Row="6"
                         Grid.ColumnSpan="2"
                         Margin="50,0"
                         VerticalOptions="FillAndExpand"

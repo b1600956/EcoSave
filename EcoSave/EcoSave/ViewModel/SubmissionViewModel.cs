@@ -100,7 +100,6 @@ namespace EcoSave.ViewModel
                 if(selectedCollector != null)
                     Submission.Collector = selectedCollector.Username;
                 CanPropose = CheckFields();
-                selectedCollector = null;
                 OnPropertyChanged();
             }
         }
@@ -206,13 +205,18 @@ namespace EcoSave.ViewModel
         }
         private async void ProposeSubmissionExecute(object obj)
         {
-            Submission.SubmissionID = Guid.NewGuid().ToString(); 
-            Submission.Recycler = RecyclerViewModel.Recycler.Username;
-            Submission.Status = StatusProposed;
-            Submission.Material = Material.MaterialID;
-            await SubmissionDA.AddSubmission(Submission);
-            await Application.Current.MainPage.DisplayAlert("Submit Material to Recycle", "You have successfully made an appointment with " + Submission.Collector + " on " + Submission.ProposedDate.ToString("d"), "OK");
-            await Application.Current.MainPage.Navigation.PopAsync();
+            if (!string.IsNullOrWhiteSpace(Submission.Collector))
+            {
+                var newGuid = Guid.NewGuid();
+                string id = Convert.ToBase64String(newGuid.ToByteArray());
+                Submission.SubmissionID = id.Remove(id.Length - 2, 2);
+                Submission.Recycler = RecyclerViewModel.Recycler.Username;
+                Submission.Status = StatusProposed;
+                Submission.Material = Material.MaterialID;
+                await SubmissionDA.AddSubmission(Submission);
+                await Application.Current.MainPage.DisplayAlert("Submit Material to Recycle", "You have successfully made an appointment with " + Submission.Collector + " on " + Submission.ProposedDate.ToString("d"), "OK");
+                await Application.Current.MainPage.Navigation.PopAsync();
+            }
         }
 
         private bool CanProposeM(object arg)
@@ -305,7 +309,9 @@ namespace EcoSave.ViewModel
                         Submission.Recycler = Recycler.Username;
                         Submission.ProposedDate = DateTime.Today;
                         Submission.Collector = Collector.Username;
-                        Submission.SubmissionID = Guid.NewGuid().ToString();
+                        var newGuid = Guid.NewGuid();
+                        string id = Convert.ToBase64String(newGuid.ToByteArray());
+                        Submission.SubmissionID = id.Remove(id.Length - 2, 2);
                         Submission.Status = StatusProposed;
                         Submission.Material = Material.MaterialID;
                         await SubmissionDA.AddSubmission(Submission);

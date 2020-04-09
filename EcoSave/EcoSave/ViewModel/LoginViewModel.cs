@@ -115,17 +115,14 @@ namespace EcoSave.ViewModel
                 if(UserType == StartViewModel.AdminUserType)
                 {
                     a = await AdminDA.GetAdmin(User);
-                    view = new Views.AdminMainView();
 
                 }else if(UserType == StartViewModel.RecyclerUserType)
                 {
                     a = await RecyclerDA.GetRecycler(User);
-                    view = new Views.RecyclerMainView();
                 }
                 else
                 {
                     a = await CollectorDA.GetCollector(User);
-                    view = new Views.CollectorMainView();
                 }
                 if (a != null)
                 {
@@ -140,11 +137,19 @@ namespace EcoSave.ViewModel
                             Application.Current.Properties.Add("loggedIn", 1);
                             await Application.Current.SavePropertiesAsync();
                         }
-                        if(a is Recycler)
+                        if (a is Recycler)
                         {
                             RecyclerViewModel.Recycler = (Recycler)a;
-                        }else if(a is Collector){
+                            view = new Views.RecyclerMainView();
+                        }
+                        else if(a is Collector){
                             CollectorViewModel.Collector = (Collector)a;
+                            view = new Views.CollectorMainView();
+                        }
+                        else
+                        {
+                            MainViewModel.Admin = a;
+                            view = new Views.AdminMainView();
                         }
                         Username = string.Empty;
                         Password = string.Empty;
