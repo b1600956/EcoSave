@@ -25,8 +25,8 @@ namespace EcoSave.Utilities
                     .OnceAsync<Submission>()).Select(item => new Submission
                     {
                         SubmissionID = item.Object.SubmissionID,
-                        ProposedDate = Convert.ToDateTime(item.Object.ProposedDate),
-                        ActualDate = Convert.ToDateTime(item.Object.ActualDate),
+                        ProposedDate = item.Object.ProposedDate,
+                        ActualDate = item.Object.ActualDate,
                         WeightInKg = item.Object.WeightInKg,
                         PointsAwarded = item.Object.PointsAwarded,
                         Status = item.Object.Status,
@@ -133,14 +133,14 @@ namespace EcoSave.Utilities
         {
             try
             {
-                var submissions = await GetSubmissionsByMaterial(material);
+                var submissions = await GetAllSubmissions();
 
                 ObservableCollection<Submission> submissionsList = new ObservableCollection<Submission>();
                 if (submissions != null)
                 {
                     foreach (Submission submission in submissions)
                     {
-                        if (submission.Recycler == recycler.Username)
+                        if (submission.Recycler == recycler.Username && submission.Material == material.MaterialID)
                             submissionsList.Add(submission);
                     }
                     return submissionsList;
@@ -158,14 +158,14 @@ namespace EcoSave.Utilities
         {
             try
             {
-                var submissions = await GetSubmissionsByMaterial(material);
+                var submissions = await GetAllSubmissions();
 
                 ObservableCollection<Submission> submissionsList = new ObservableCollection<Submission>();
                 if (submissions != null)
                 {
                     foreach (Submission submission in submissions)
                     {
-                        if (submission.Collector == collector.Username)
+                        if (submission.Collector == collector.Username && submission.Material == material.MaterialID)
                             submissionsList.Add(submission);
                     }
                     return submissionsList;
@@ -174,7 +174,7 @@ namespace EcoSave.Utilities
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Firebase Exception SDA6", ex.Message, "OK");
+                await Application.Current.MainPage.DisplayAlert("Firebase Exception SDA7", ex.Message, "OK");
                 return null;
             }
         }

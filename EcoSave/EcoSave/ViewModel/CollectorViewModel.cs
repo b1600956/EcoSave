@@ -206,6 +206,7 @@ namespace EcoSave.ViewModel
         private async void UpdateCollectorExecute(object obj)
         {
             await CollectorDA.UpdateCollector(Collector);
+            await Application.Current.MainPage.DisplayAlert("User Profile", "Your profile is updated", "OK");
             await Application.Current.MainPage.Navigation.PopAsync();
         }
 

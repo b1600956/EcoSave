@@ -1,4 +1,7 @@
-﻿using System;
+﻿using EcoSave.Model;
+using EcoSave.Utilities;
+using EcoSave.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +18,17 @@ namespace EcoSave.Views
         public CollectorMainView()
         {
             InitializeComponent();
+        }
+
+        protected async override void OnAppearing()
+        {
+            base.OnAppearing();
+            fullName_view.Text = CollectorViewModel.Collector.FullName;
+            Collector collector = await CollectorDA.GetCollectorByUsername(CollectorViewModel.Collector.Username);
+            if(collector != null)
+            {
+                totalPoints_view.Text = collector.TotalPoints.ToString();
+            }
         }
     }
 }

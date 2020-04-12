@@ -11,12 +11,12 @@
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <local:SubmissionViewModel x:Key="SVM" />
+            <local:ProposeSubmissionVM x:Key="PSVM" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout BindingContext="{StaticResource SVM}"
+        <StackLayout BindingContext="{StaticResource PSVM}"
                      Margin="10"
                      Padding="10">
 
@@ -35,20 +35,26 @@
                     <ColumnDefinition Width="0.5*"/>
                 </Grid.ColumnDefinitions>
                 <Label Text="Select date to recycle"
+                       Grid.ColumnSpan="2"
+                       FontSize="20"
                        FontAttributes="Bold"
                        TextColor="black"/>
                 <DatePicker
                     Grid.Row="1"
                     Grid.ColumnSpan="2"
+                    VerticalOptions="Start"
                     MinimumDate="{x:Static sys:DateTime.Today}"
                     Date="{Binding ProposedDate,Mode=OneWayToSource}"
                     />
                 <Label 
                     Grid.Row="2"
-                    Text="Collectors"/>
+                    Text="Select a collector"
+                    FontSize="20"
+                    FontAttributes="Bold"
+                    TextColor="Black"/>
                           
                 <ListView x:Name="MyListView"
-                          ItemsSource="{Binding CollectorList}"
+                          ItemsSource="{Binding CollectorList, Mode=TwoWay}"
                           SelectedItem="{Binding SelectedCollector,Mode=OneWayToSource}"
                           Grid.Row="3"
                           Grid.ColumnSpan="2"
@@ -65,11 +71,15 @@
                                         <ColumnDefinition Width="0.5*"/>
                                     </Grid.ColumnDefinitions>
                                     <Label Grid.Row="0"
-                                           Text="{Binding Username}"/>
+                                           Text="{Binding Username}"
+                                           FontSize="Body"
+                                           VerticalOptions="Center"/>
 
                                     <Label Grid.Row="0"
                                            Grid.Column="1"
-                                           Text="{Binding Address}"/>
+                                           Text="{Binding Address}"
+                                           FontSize="Body"
+                                           VerticalOptions="Center"/>
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>

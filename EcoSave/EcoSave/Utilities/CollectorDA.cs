@@ -60,7 +60,7 @@ namespace EcoSave.Utilities
             {
                 var allCollectors = await GetAllCollectors();
                 ObservableCollection<Collector> collectorList = new ObservableCollection<Collector>();
-                if (allCollectors != null)
+                if (allCollectors != null && collectors != null)
                 {
                     
                     foreach (Collector collector in allCollectors)

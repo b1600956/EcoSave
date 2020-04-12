@@ -22,7 +22,7 @@ namespace EcoSave.Views
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            MyListView.ItemsSource = await CollectorDA.GetCollectorsByUsername(SubmissionViewModel.Material.CollectorList);
+            MyListView.ItemsSource = await CollectorDA.GetCollectorsByUsername(ProposeSubmissionVM.Material.CollectorList);
         }
     }
 }

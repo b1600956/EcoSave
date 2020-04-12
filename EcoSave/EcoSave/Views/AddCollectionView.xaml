@@ -20,66 +20,138 @@
                      Margin="10"
                      Padding="10">
 
-                <Grid>
-                    <Grid.RowDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
                         <RowDefinition Height="0.1*"/>
-                        <RowDefinition Height="0.9*"/>
-                    </Grid.RowDefinitions>
+                        <RowDefinition Height="0.4*"/>
+                        <RowDefinition Height="0.1*"/>
+                        <RowDefinition Height="0.4*"/>
+                </Grid.RowDefinitions>
 
-                    <Grid.ColumnDefinitions>
+                <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="0.3*"/>
                         <ColumnDefinition Width="0.5*"/>
-                        <ColumnDefinition Width="0.5*"/>
-                        <ColumnDefinition Width="0.5*"/>
-                    </Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.3*"/>
+                </Grid.ColumnDefinitions>
 
-                    <Label Text="Material ID"/>
+                    <Label Text="Material ID"
+                           FontAttributes="Bold"/>
                     <Label Text="Material Name"
-                       Grid.Column="1"/>
-                    <Label Text="Description" Grid.Column="2"/>
-                    <Label Text="PointperKG" Grid.Column="3"/>
-                    <ListView x:Name="MyListView"
-                          ItemsSource="{Binding AvailableMaterialList}"
+                           Grid.Column="1"
+                           FontAttributes="Bold"/>
+                    <Label Text="Description" 
+                           Grid.Column="2"
+                           FontAttributes="Bold"/>
+                    <Label Text="Points/KG" 
+                           Grid.Column="3"
+                           FontAttributes="Bold"/>
+                <ListView x:Name="MyListView"
+                          ItemsSource="{Binding AvailableMaterialList, Mode=TwoWay}"
                           SelectedItem="{Binding SelectedMaterial,Mode=OneWayToSource}"
                           Grid.Row="1"
                           Grid.ColumnSpan="4"
                           CachingStrategy="RecycleElement">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="0.5*"/>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="0.5*"/>
-                                            <ColumnDefinition Width="0.5*"/>
-                                            <ColumnDefinition Width="0.5*"/>
-                                            <ColumnDefinition Width="0.5*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Label Grid.Row="0"
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="0.5*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.5*"/>
+                                        <ColumnDefinition Width="0.3*"/>
+                                        <ColumnDefinition Width="0.5*"/>
+                                        <ColumnDefinition Width="0.3*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Row="0"
                                            Text="{Binding MaterialID}"/>
 
-                                        <Label Grid.Row="0"
+                                    <Label Grid.Row="0"
                                            Grid.Column="1"
                                            Text="{Binding MaterialName}"/>
 
-                                        <Label Grid.Row="0"
+                                    <Label Grid.Row="0"
                                            Grid.Column="2"                                          
                                            Text="{Binding Description}"/>
 
-                                        <Label Grid.Row="0"
-                                           Grid.Column="3"                                          
+                                    <Label Grid.Row="0"
+                                           Grid.Column="3"
+                                           HorizontalOptions="Center"
                                            Text="{Binding PointsPerKg}"/>
 
-                                    </Grid>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
 
-                    </ListView>
-                </Grid>
+                </ListView>
+                <Label Text="{Binding MaterialCount}"
+                       FontSize="20"
+                       HorizontalOptions="End"
+                       Margin="10, 0"
+                       VerticalOptions="Center"
+                       Grid.Row="2"/>
+                <Label Text="Added Materials"
+                       VerticalOptions="Center"
+                       FontSize="20"
+                       Grid.Row="2"
+                       Grid.Column="1"
+                       Grid.ColumnSpan="2"/>
+                <ListView x:Name="addedMaterialList"
+                          ItemsSource="{Binding MaterialList,Mode=TwoWay}"
+                          Grid.Row="3"
+                          Grid.ColumnSpan="4"
+                          CachingStrategy="RecycleElement">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="0.5*"/>
+                                        <RowDefinition Height="0.5*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.5*"/>
+                                        <ColumnDefinition Width="0.2*"/>
+                                        <ColumnDefinition Width="0.3*"/>
+                                    </Grid.ColumnDefinitions>
 
-            </StackLayout>
+                                    <Label Grid.Row="0"
+                                           Grid.ColumnSpan="2"
+                                           HorizontalOptions="Start"
+                                           Margin="10,0"
+                                           FontSize="17"
+                                           TextColor="Black"
+                                           Text="{Binding MaterialName}"/>
+
+                                    <Label Grid.Row="1"
+                                           Grid.ColumnSpan="2"
+                                           HorizontalOptions="Start"
+                                           Margin="10,0"
+                                           Text="{Binding Description}"/>
+
+                                    <Label Grid.RowSpan="2"
+                                           Grid.Column="1"       
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="End"
+                                           Margin="5,0"
+                                           Text="{Binding PointsPerKg}"/>
+                                    <Label Grid.RowSpan="2"
+                                           Grid.Column="2"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Start"
+                                           Text="Points/Kg"/>
+
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
+            </Grid>
+
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

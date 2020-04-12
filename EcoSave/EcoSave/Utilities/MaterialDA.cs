@@ -15,11 +15,11 @@ namespace EcoSave.Utilities
     {
         static readonly FirebaseClient Firebase = new FirebaseClient("https://bookapp-d865a.firebaseio.com/");
 
-        public static async Task<ObservableCollection<Material>> GetAllMaterials()
+        public static async Task<List<Material>> GetAllMaterials()
         {
             try
             {
-                List<Material> materials = (await Firebase
+                return (await Firebase
                     .Child("Materials")
                     .OnceAsync<Material>()).Select(item => new Material
                     {
@@ -29,13 +29,6 @@ namespace EcoSave.Utilities
                         PointsPerKg = item.Object.PointsPerKg,
                         CollectorList = item.Object.CollectorList
                     }).ToList();
-
-                ObservableCollection<Material> materialsList = new ObservableCollection<Material>();
-                foreach (Material material in materials)
-                {
-                    materialsList.Add(material);
-                }
-                return materialsList;
             }
             catch (Exception ex)
             {
@@ -47,14 +40,14 @@ namespace EcoSave.Utilities
         {
             try
             {
-                var materials = await GetAllMaterials();
+                var materials = await GetAllMaterialViews();
 
                 ObservableCollection<Material> materialsList = new ObservableCollection<Material>();
-                if (materials != null)
+                if (materials != null && materialCollection != null)
                 {
                     foreach (Material material in materials)
                     {
-                        if (materialCollection == null || !materialCollection.Contains(material.MaterialID))
+                        if (materialCollection.Contains(material.MaterialID))
                             materialsList.Add(material);
                     }
                     return materialsList;
@@ -146,6 +139,60 @@ namespace EcoSave.Utilities
             catch (Exception ex)
             {
                 await Application.Current.MainPage.DisplayAlert("Firebase Exception MDA7", ex.Message, "OK");
+                return null;
+            }
+        }
+
+        public static async Task<ObservableCollection<Material>> GetAllMaterialViews()
+        {
+            try
+            {
+                List<Material> materials = (await Firebase
+                    .Child("Materials")
+                    .OnceAsync<Material>()).Select(item => new Material
+                    {
+                        MaterialID = item.Object.MaterialID,
+                        MaterialName = item.Object.MaterialName,
+                        Description = item.Object.Description,
+                        PointsPerKg = item.Object.PointsPerKg,
+                        CollectorList = item.Object.CollectorList
+                    }).ToList();
+
+                ObservableCollection<Material> materialsList = new ObservableCollection<Material>();
+                foreach (Material material in materials)
+                {
+                    materialsList.Add(material);
+                }
+                return materialsList;
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Firebase Exception MDA8", ex.Message, "OK");
+                return null;
+            }
+        }
+
+        public static async Task<ObservableCollection<Material>> GetAvailableMaterialsById(List<string> materialCollection)
+        {
+            try
+            {
+                var materials = await GetAllMaterialViews();
+
+                ObservableCollection<Material> materialsList = new ObservableCollection<Material>();
+                if (materials != null)
+                {
+                    foreach (Material material in materials)
+                    {
+                        if (materialCollection == null || !materialCollection.Contains(material.MaterialID))
+                            materialsList.Add(material);
+                    }
+                    return materialsList;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Firebase Exception MDA9", ex.Message, "OK");
                 return null;
             }
         }

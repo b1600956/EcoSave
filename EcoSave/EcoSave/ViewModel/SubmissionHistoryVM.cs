@@ -37,15 +37,12 @@ namespace EcoSave.ViewModel
             set
             {
                 selectedSort = value;
-                if (selectedSort != null)
+                if(selectedSort == "Actual Date")
                 {
-                    if(selectedSort == "Actual Date")
-                    {
-                        SortSubmissionsByActualDate.Execute(null);
-                    }else if(selectedSort == "Status")
-                    {
-                        SortSubmissionsByStatus.Execute(null);
-                    }
+                    SortSubmissionsByActualDate.Execute(null);
+                }else if(selectedSort == "Status")
+                {
+                    SortSubmissionsByStatus.Execute(null);
                 }
                 OnPropertyChanged();
             }
@@ -106,7 +103,7 @@ namespace EcoSave.ViewModel
             GetSubmissionList();
         }
 
-        private async void GetSortList()
+        private void GetSortList()
         {
             SortList.Add("Actual Date");
             SortList.Add("Status");

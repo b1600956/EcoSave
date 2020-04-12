@@ -76,9 +76,15 @@ namespace EcoSave.ViewModel
         {
             SubmissionList = new ObservableCollection<Submission>();
             GetSubmissionList();
+            GetMaterialList();
             SearchSubmission = new Command<string>(SearchSubmissionExecute);
             OpenRecordMaterialView = new Command<Submission>(OpenRecordMaterialExecute);
             CreateSubmission = new Command(CreateSubmissionExecute);
+        }
+
+        private async void GetMaterialList()
+        {
+            MaterialIdToNameConverter.AllMaterials = await MaterialDA.GetAllMaterials();
         }
 
         private async void GetSubmissionList()

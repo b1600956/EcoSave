@@ -16,18 +16,6 @@ namespace EcoSave.ViewModel
         public const string StatusProposed = "Proposed";
         public const string StatusSubmitted = "Submitted";
 
-        private bool canPropose;
-
-        public bool CanPropose
-        {
-            get { return canPropose; }
-            set
-            {
-                canPropose = value;
-                OnPropertyChanged();
-            }
-        }
-
         private bool canUpdate;
 
         public bool CanUpdate
@@ -84,25 +72,7 @@ namespace EcoSave.ViewModel
         public static Submission Submission { get; set; }
         public Recycler Recycler { get; set; }
         public Collector Collector { get; set; }
-        public ObservableCollection<Collector> CollectorList { get; set; }
 
-        private Collector selectedCollector;
-
-        public Collector SelectedCollector
-        {
-            get
-            {
-                return selectedCollector;
-            }
-            set
-            {
-                selectedCollector = value;
-                if(selectedCollector != null)
-                    Submission.Collector = selectedCollector.Username;
-                CanPropose = CheckFields();
-                OnPropertyChanged();
-            }
-        }
         public DateTime ProposedDate
         {
             get
@@ -112,7 +82,6 @@ namespace EcoSave.ViewModel
             set
             {
                 Submission.ProposedDate = value;
-                CanPropose = CheckFields();
                 OnPropertyChanged();
             }
         }
@@ -166,21 +135,12 @@ namespace EcoSave.ViewModel
             }
         }
 
-
-        private bool CheckFields()
-        {
-            return SelectedCollector != null && ProposedDate != default(DateTime) && DateTime.Compare(ProposedDate,DateTime.Today) >= 0;
-        }
-
-        public ICommand ProposeSubmission { get; set; }
         public ICommand UpdateSubmission { get; set; }
         public ICommand CreateSubmission { get; set; }
         public SubmissionViewModel()
         {
-                CollectorList = new ObservableCollection<Collector>();
                 Recycler = new Recycler();
                 Collector = new Collector();
-                ProposeSubmission = new Command(ProposeSubmissionExecute, CanProposeM);
                 UpdateSubmission = new Command(UpdateSubmissionExecute, CanUpdateM);
                 CreateSubmission = new Command(CreateSubmissionExecute, CanCreateM);
                 if (Material == default(Material))
@@ -195,48 +155,19 @@ namespace EcoSave.ViewModel
                 {
                     InitializeFromSubmission();
                 }
-                if(RecyclerViewModel.Recycler != null && Material != null)
-                    GetCollectorList();
         }
 
-        private async void GetCollectorList()
-        {
-            CollectorList = await CollectorDA.GetCollectorsByUsername(Material.CollectorList);
-        }
-        private async void ProposeSubmissionExecute(object obj)
-        {
-            if (!string.IsNullOrWhiteSpace(Submission.Collector))
-            {
-                var newGuid = Guid.NewGuid();
-                string id = Convert.ToBase64String(newGuid.ToByteArray());
-                Submission.SubmissionID = id.Remove(id.Length - 2, 2);
-                Submission.Recycler = RecyclerViewModel.Recycler.Username;
-                Submission.Status = StatusProposed;
-                Submission.Material = Material.MaterialID;
-                await SubmissionDA.AddSubmission(Submission);
-                await Application.Current.MainPage.DisplayAlert("Submit Material to Recycle", "You have successfully made an appointment with " + Submission.Collector + " on " + Submission.ProposedDate.ToString("d"), "OK");
-                await Application.Current.MainPage.Navigation.PopAsync();
-            }
-        }
-
-        private bool CanProposeM(object arg)
-        {
-            return CanPropose;
-        }
         private async void UpdateSubmissionExecute(object obj)
         {
             UpdateStatus = string.Empty;
             Material material = new Material();
-                    if (MaterialName.ToLower() != Material.MaterialName.ToLower())
-                    {
-                        material = await MaterialDA.GetMaterialByName(MaterialName);
-                    }
+            material = await MaterialDA.GetMaterialByName(MaterialName);
             if (material != null)
                 {
                     if (CollectorViewModel.Collector.MaterialCollection.Contains(material.MaterialID))
                     {
-                    Material = material;
-                    UpdateSubmissionForAll();
+                        Material = material;
+                        UpdateSubmissionForAll();
                         await Application.Current.MainPage.DisplayAlert("Record Material Submission", "You have successfully updated the submission.", "OK");
                         await Application.Current.MainPage.Navigation.PopAsync();
                     }

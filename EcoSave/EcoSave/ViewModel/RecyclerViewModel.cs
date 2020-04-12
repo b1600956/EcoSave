@@ -206,6 +206,7 @@ namespace EcoSave.ViewModel
         private async void UpdateRecyclerExecute(object obj)
         {
             await RecyclerDA.UpdateRecycler(Recycler);
+            await Application.Current.MainPage.DisplayAlert("User Profile", "Your profile is updated", "OK");
             await Application.Current.MainPage.Navigation.PopAsync();
         }
 

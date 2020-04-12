@@ -21,7 +21,7 @@ namespace EcoSave.Views
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            MyListView.ItemsSource = await MaterialDA.GetAllMaterials();
+            MyListView.ItemsSource = await MaterialDA.GetAllMaterialViews();
         }
     }
 }

@@ -56,25 +56,28 @@
 
                 <Label Grid.Row="1"
                        Grid.Column="1"
-                       Text="{Binding FullName,Mode=TwoWay}"
-                       Margin="15,0"
+                       Margin="10,0"
+                       Text="{Binding EcoLevel,Mode=TwoWay}"
                        FontSize="20"/>
 
                 <Label Grid.Row="2"
                        Grid.ColumnSpan="2"
+                       x:Name="fullName_view"
+                       Text="{Binding FullName,Mode=TwoWay}"
                        HorizontalOptions="Center"
-                       Text="{Binding EcoLevel,Mode=TwoWay}"
                        FontSize="20"/>
 
                 <Label Grid.Row="3"
+                       Margin="15,0"
+                       x:Name="totalPoints_view"
+                       Text="{Binding TotalPoints,Mode=TwoWay}"
                        HorizontalOptions="End"
-                       Text="Total Points: "
                        FontSize="20"/>
 
                 <Label Grid.Row="3"
                        Grid.Column="1"
-                       Margin="15,0"
-                       Text="{Binding TotalPoints,Mode=TwoWay}"
+                       HorizontalOptions="Start"
+                       Text="Points"
                        FontSize="20"/>
 
                 <Button Grid.Row="4"

@@ -54,16 +54,24 @@
                            SearchCommand="{Binding SearchSubmission, Mode=TwoWay}"
                            SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
                 <Label Text="Recycler"
-                       Grid.Row="1"/>
+                       Grid.Row="1"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"/>
                 <Label Text="Material"
                        Grid.Column="1"
-                       Grid.Row="1"/>
+                       Grid.Row="1"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"/>
                 <Label Text="Proposed Date" 
                        Grid.Row="1"
-                       Grid.Column="2"/>
+                       Grid.Column="2"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"/>
                 <Label Text="Status" 
                        Grid.Row="1"
-                       Grid.Column="3"/>
+                       Grid.Column="3"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"/>
                 
                 <ListView x:Name="MyListView"
                           ItemsSource="{Binding SubmissionList,Mode=TwoWay}"
@@ -112,7 +120,8 @@
                        HorizontalOptions="Start"
                        VerticalOptions="Center"
                        Text="{Binding SearchResult}"
-                       FontSize="15"/>
+                       FontSize="20"
+                       TextColor="Black"/>
             </Grid>
 
         </StackLayout>

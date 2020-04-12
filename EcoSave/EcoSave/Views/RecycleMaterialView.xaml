@@ -28,16 +28,22 @@
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="0.3*"/>
                     <ColumnDefinition Width="0.5*"/>
-                    <ColumnDefinition Width="0.5*"/>
-                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="0.3*"/>
                 </Grid.ColumnDefinitions>
 
-                <Label Text="Material ID"/>
+                <Label Text="Material ID"
+                       FontAttributes="Bold"/>
                 <Label Text="Material Name"
-                       Grid.Column="1"/>
-                <Label Text="Description" Grid.Column="2"/>
-                <Label Text="PointperKG" Grid.Column="3"/>
+                       Grid.Column="1"
+                       FontAttributes="Bold"/>
+                <Label Text="Description" 
+                       Grid.Column="2"
+                       FontAttributes="Bold"/>
+                <Label Text="Point/KG" 
+                       Grid.Column="3"
+                       FontAttributes="Bold"/>
                 <ListView x:Name="MyListView"
                           ItemsSource="{Binding MaterialList}"
                           SelectedItem="{Binding SelectedMaterial,Mode=OneWayToSource}"
@@ -53,9 +59,9 @@
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="0.5*"/>
+                                        <ColumnDefinition Width="0.3*"/>
                                         <ColumnDefinition Width="0.5*"/>
-                                        <ColumnDefinition Width="0.5*"/>
-                                        <ColumnDefinition Width="0.5*"/>
+                                        <ColumnDefinition Width="0.3*"/>
                                     </Grid.ColumnDefinitions>
                                     <Label Grid.Row="0"
                                            Text="{Binding MaterialID}"/>
@@ -69,7 +75,8 @@
                                            Text="{Binding Description}"/>
 
                                     <Label Grid.Row="0"
-                                           Grid.Column="3"                                          
+                                           Grid.Column="3"
+                                           HorizontalOptions="Center"
                                            Text="{Binding PointsPerKg}"/>
 
                                 </Grid>

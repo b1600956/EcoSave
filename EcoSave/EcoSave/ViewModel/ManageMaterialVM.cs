@@ -51,7 +51,7 @@ namespace EcoSave.ViewModel
 
         private async void GetAllMaterials()
         {
-            MaterialList = await MaterialDA.GetAllMaterials();
+            MaterialList = await MaterialDA.GetAllMaterialViews();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

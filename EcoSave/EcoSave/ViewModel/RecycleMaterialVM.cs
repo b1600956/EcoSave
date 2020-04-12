@@ -42,11 +42,11 @@ namespace EcoSave.ViewModel
 
         private async void GetAllMaterials()
         {
-            MaterialList = await MaterialDA.GetAllMaterials();
+            MaterialList = await MaterialDA.GetAllMaterialViews();
         }
         private void RecycleMaterialExecute(Material material)
         {
-            SubmissionViewModel.Material = material;
+            ProposeSubmissionVM.Material = material;
             Application.Current.MainPage.Navigation.PushAsync(new Views.ProposeSubmissionView());
         }
 

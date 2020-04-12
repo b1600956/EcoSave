@@ -44,18 +44,54 @@ namespace EcoSave.ViewModel
             }
         }
 
+        private ObservableCollection<Material> materialList;
+
+        public ObservableCollection<Material> MaterialList
+        {
+            get { return materialList; }
+            set
+            {
+                materialList = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private int materialCount;
+
+        public int MaterialCount
+        {
+            get { return materialCount; }
+            set { 
+                materialCount = value;
+                OnPropertyChanged();
+            }
+        }
+
+
 
         public ICommand AddMaterial { get; set; }
         public CollectionViewModel()
         {
             AvailableMaterialList = new ObservableCollection<Material>();
+            MaterialList = new ObservableCollection<Material>();
             GetAvailableMaterials();
             AddMaterial = new Command<Material>(AddMaterialExecute);
         }
 
         private async void GetAvailableMaterials()
         {
-            AvailableMaterialList = await MaterialDA.GetMaterialsById(CollectorViewModel.Collector.MaterialCollection);
+            MaterialList = await MaterialDA.GetMaterialsById(CollectorViewModel.Collector.MaterialCollection);
+            AvailableMaterialList = await MaterialDA.GetAvailableMaterialsById(CollectorViewModel.Collector.MaterialCollection);
+            if(MaterialList != null)
+            {
+                MaterialCount = MaterialList.Count;
+            }
+            else
+            {
+                MaterialCount = 0;
+                MaterialList = new ObservableCollection<Material>();
+            }
+            
         }
         private async void AddMaterialExecute(Material material)
         {
@@ -69,7 +105,9 @@ namespace EcoSave.ViewModel
             material.CollectorList.Add(collector.Username);
             await MaterialDA.UpdateMaterial(material);
             AvailableMaterialList.Remove(material);
-            await Application.Current.MainPage.DisplayAlert("Add Material into Collection", "Material "+material.MaterialName+" is successfully added.", "OK");
+            MaterialList.Add(material);
+            MaterialCount = MaterialList.Count;
+            //await Application.Current.MainPage.DisplayAlert("Add Material into Collection", "Material "+material.MaterialName+" is successfully added.", "OK");
             //await Application.Current.MainPage.Navigation.PopAsync();
         }
 
