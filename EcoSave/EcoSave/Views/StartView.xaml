@@ -22,8 +22,8 @@
 
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.25*"/>
                     <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.25*"/>
                     <RowDefinition Height="0.1*"/>
                     <RowDefinition Height="0.1*"/>
                     <RowDefinition Height="0.1*"/>
@@ -36,21 +36,14 @@
                     <ColumnDefinition Width="0.25*"/>
                 </Grid.ColumnDefinitions>
 
-                
-                <Image Source="logo.png" VerticalOptions="End" />
-                
-          
-                <Label Grid.ColumnSpan="2"
-                       HorizontalOptions="Center"
-                       VerticalOptions="Center"
-                       FontSize="30"
-                       FontAttributes="Bold"
-                       Text="Welcome to EcoSave"
-                       TextColor="Black"/>
+                <Image Source="https://firebasestorage.googleapis.com/v0/b/bookapp-d865a.appspot.com/o/logo.png?alt=media&amp;token&#61;6c6c4e2a-5904-4514-80a1-48fae1986d54" 
+                       VerticalOptions="Center" 
+                       Grid.Row="1"
+                       Grid.Column="0"
+                       Grid.ColumnSpan="2" 
+                       HeightRequest="120"/>
 
-                
-
-                <Button Grid.Row="1"
+                <Button Grid.Row="2"
                         Grid.ColumnSpan="2"
                         Margin="50,0"
                         VerticalOptions="FillAndExpand"
@@ -62,7 +55,7 @@
                         BackgroundColor="#29D959"
                         Command="{Binding UserAsRecycler}"/>
 
-                <Button Grid.Row="3"
+                <Button Grid.Row="4"
                         Grid.ColumnSpan="2"
                         Margin="50,0"
                         VerticalOptions="FillAndExpand"
@@ -75,7 +68,7 @@
                         Command="{Binding UserAsCollector}"/>
 
 
-                <Button Grid.Row="5"
+                <Button Grid.Row="6"
                         Grid.ColumnSpan="2"
                         Margin="50,0"
                         VerticalOptions="FillAndExpand"
